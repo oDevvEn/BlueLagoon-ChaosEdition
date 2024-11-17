@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blue Lagoon - Chaos Edition", "Blue Lagoon - Chaos Edition.csproj", "{8E8D5454-40BD-434A-8DCB-714191DD8879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blue Lagoon - Chaos Edition", "Blue Lagoon - Chaos Edition.csproj", "{8E8D5454-40BD-434A-8DCB-714191DD8879}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blue Lagoon - Chaos Edition (SERVER)", "..\Blue Lagoon - Chaos Edition (SERVER)\Blue Lagoon - Chaos Edition (SERVER).csproj", "{6DF76C17-0E90-4756-8AC2-9A684DB6E51E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8E8D5454-40BD-434A-8DCB-714191DD8879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E8D5454-40BD-434A-8DCB-714191DD8879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E8D5454-40BD-434A-8DCB-714191DD8879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF76C17-0E90-4756-8AC2-9A684DB6E51E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF76C17-0E90-4756-8AC2-9A684DB6E51E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF76C17-0E90-4756-8AC2-9A684DB6E51E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF76C17-0E90-4756-8AC2-9A684DB6E51E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

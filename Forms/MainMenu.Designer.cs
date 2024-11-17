@@ -28,7 +28,7 @@
             QuitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
-            Username = new TextBox();
+            label2 = new Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -37,12 +37,12 @@
             PlayButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PlayButton.Font = new Font("Segoe UI", 90F, FontStyle.Regular, GraphicsUnit.Document);
             PlayButton.ImeMode = ImeMode.NoControl;
-            PlayButton.Location = new Point(100, 298);
+            PlayButton.Location = new Point(100, 241);
             PlayButton.Margin = new Padding(20);
             PlayButton.Name = "PlayButton";
-            PlayButton.Size = new Size(200, 48);
+            PlayButton.Size = new Size(200, 64);
             PlayButton.TabIndex = 0;
-            PlayButton.Text = "Play AI";
+            PlayButton.Text = "Play";
             PlayButton.UseVisualStyleBackColor = true;
             PlayButton.Click += PlayButton_Click;
             // 
@@ -51,10 +51,10 @@
             StatisticsButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             StatisticsButton.Font = new Font("Segoe UI", 90F, FontStyle.Regular, GraphicsUnit.Document);
             StatisticsButton.ImeMode = ImeMode.NoControl;
-            StatisticsButton.Location = new Point(100, 386);
+            StatisticsButton.Location = new Point(100, 345);
             StatisticsButton.Margin = new Padding(20);
             StatisticsButton.Name = "StatisticsButton";
-            StatisticsButton.Size = new Size(200, 48);
+            StatisticsButton.Size = new Size(200, 64);
             StatisticsButton.TabIndex = 2;
             StatisticsButton.Text = "Statistics";
             StatisticsButton.UseVisualStyleBackColor = true;
@@ -65,10 +65,10 @@
             QuitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             QuitButton.Font = new Font("Segoe UI", 90F, FontStyle.Regular, GraphicsUnit.Document);
             QuitButton.ImeMode = ImeMode.NoControl;
-            QuitButton.Location = new Point(100, 474);
+            QuitButton.Location = new Point(100, 449);
             QuitButton.Margin = new Padding(20);
             QuitButton.Name = "QuitButton";
-            QuitButton.Size = new Size(200, 48);
+            QuitButton.Size = new Size(200, 64);
             QuitButton.TabIndex = 3;
             QuitButton.Text = "Rage Quit";
             QuitButton.UseVisualStyleBackColor = true;
@@ -81,24 +81,24 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel1.Controls.Add(QuitButton, 1, 6);
-            tableLayoutPanel1.Controls.Add(StatisticsButton, 1, 5);
-            tableLayoutPanel1.Controls.Add(label1, 2, 7);
-            tableLayoutPanel1.Controls.Add(PlayButton, 1, 4);
-            tableLayoutPanel1.Controls.Add(Username, 1, 3);
+            tableLayoutPanel1.Controls.Add(QuitButton, 1, 5);
+            tableLayoutPanel1.Controls.Add(StatisticsButton, 1, 4);
+            tableLayoutPanel1.Controls.Add(label1, 2, 6);
+            tableLayoutPanel1.Controls.Add(PlayButton, 1, 3);
+            tableLayoutPanel1.Controls.Add(label2, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 8;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 9.090909F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 18.181818F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 4.5454545F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.772727F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.772727F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.772727F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.772727F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 9.090909F));
+            tableLayoutPanel1.RowCount = 7;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10.6666651F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 21.33333F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5.33333254F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.333334F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 17.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10.6666651F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(800, 600);
             tableLayoutPanel1.TabIndex = 4;
             // 
@@ -106,26 +106,26 @@
             // 
             label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(585, 585);
+            label1.Location = new Point(526, 585);
             label1.Name = "label1";
-            label1.Size = new Size(212, 15);
+            label1.Size = new Size(271, 15);
             label1.TabIndex = 4;
-            label1.Text = "game only tested with 16:9 screen ratio";
+            label1.Text = "game only tested with 16:9 screen ratio (1366x768)";
             label1.TextAlign = ContentAlignment.BottomRight;
             // 
-            // Username
+            // label2
             // 
-            Username.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Username.Font = new Font("Segoe UI", 30F);
-            Username.Location = new Point(100, 210);
-            Username.Margin = new Padding(20);
-            Username.MaxLength = 32;
-            Username.Name = "Username";
-            Username.PlaceholderText = "Username";
-            Username.Size = new Size(200, 61);
-            Username.TabIndex = 5;
-            Username.Text = "fix me";
-            Username.TextAlign = HorizontalAlignment.Center;
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Segoe UI", 95F, FontStyle.Regular, GraphicsUnit.Document);
+            label2.Location = new Point(85, 68);
+            label2.Margin = new Padding(5);
+            label2.Name = "label2";
+            label2.Size = new Size(230, 117);
+            label2.TabIndex = 5;
+            label2.Text = "Blue Lagoon (Chaos Edition)";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MainMenu
             // 
@@ -149,6 +149,6 @@
         private Button QuitButton;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
-        private TextBox Username;
+        private Label label2;
     }
 }

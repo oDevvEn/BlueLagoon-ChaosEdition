@@ -10,9 +10,13 @@
         }
 
         private void PlayButton_Click(object sender, EventArgs e) {
-            Game game = new Game();
-            game.Show();
-            this.Hide();
+            GetUsername username = new GetUsername();
+            username.ShowDialog();
+            if (username.successful) {
+                Game game = new Game(username.username.Text);
+                game.Show();
+                this.Hide();
+            }
         }
 
         private void StatisticsButton_Click(object sender, EventArgs e) {

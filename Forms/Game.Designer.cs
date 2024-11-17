@@ -64,6 +64,7 @@
             Name = "Game";
             Text = "Game";
             WindowState = FormWindowState.Maximized;
+            Load += Game_Load;
             Paint += Game_Paint;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
