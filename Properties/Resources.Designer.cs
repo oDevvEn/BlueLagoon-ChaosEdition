@@ -99,5 +99,15 @@ namespace Blue_Lagoon___Chaos_Edition.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settler {
+            get {
+                object obj = ResourceManager.GetObject("settler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
