@@ -10,12 +10,14 @@
         }
 
         private void PlayButton_Click(object sender, EventArgs e) {
-            GetUsername username = new GetUsername();
-            username.ShowDialog();
-            if (username.successful) {
-                Game game = new Game(username.username.Text);
-                game.Show();
-                this.Hide();
+            GetConnectionInfo connectionInfo = new GetConnectionInfo();
+            connectionInfo.ShowDialog();
+            if (connectionInfo.successful) {
+                Game game = new Game(connectionInfo.username.Text, connectionInfo.ipAddress.Text, int.Parse(connectionInfo.port.Text));
+                if (!game.IsDisposed) { 
+                    game.Show();
+                    this.Hide();
+                }
             }
         }
 
