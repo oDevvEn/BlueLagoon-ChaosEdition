@@ -1,5 +1,6 @@
 ﻿using Blue_Lagoon___Chaos_Edition.Properties;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Blue_Lagoon___Chaos_Edition {
         byte[] username;
         TcpClient client;
         NetworkStream stream;
-
+        bool done = false;
         Hexagon[,] map;
         int mapSize;
         int displayY;
@@ -45,14 +46,6 @@ namespace Blue_Lagoon___Chaos_Edition {
                 ExitGame();
         }
 
-        public void HexClickEvent(object? sender, EventArgs args) {
-            Debug.Write("click");
-            if (sender is Hexagon) {
-                Hexagon hex = (Hexagon)sender;
-                stream.Write([200, (byte)hex.y, (byte)hex.x]);
-            }
-        }
-
         // i love when i have to actually use main thread to manage "stuff" (an excellent word to describe everything)
         void AddPlayerName(string name) {
             Label lbl = new Label();
@@ -69,6 +62,11 @@ namespace Blue_Lagoon___Chaos_Edition {
                     map[y, x] = hex;
                 }
             }
+            done = true;
+        }
+        void ClearMap() {
+            foreach (Hexagon hex in map)
+                hex.Clear();
         }
 
         bool ConnectServer(string ipAddress, int port) {
@@ -88,7 +86,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             while (client.Connected) {
                 int dataType = ReadByte();
                 switch (dataType) {
-                    // map receieved
+                    // Map receieved
                     case 210: {
                             mapSize = ReadByte();
                             displayY = (Screen.PrimaryScreen.Bounds.Size.Height - displaySize * (mapSize - 1) * 13 / (mapSize * 18) - displaySize / mapSize) / 2;
@@ -107,17 +105,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                                                                        new Point(0, hexSize.Height / 4) });
                                 Hexagon.region = new Region(graphicsPath);
 
-                                // Clear Map - Get every control that is map related
-                                /*List<Control> badControls = new List<Control>();
-                                foreach (Control control in BackgroundPanel.Controls) 
-                                    if (BackgroundPanel.GetCellPosition(control).Equals(new TableLayoutPanelCellPosition(0, 0))) 
-                                        badControls.Add(control);
-                               
-                                // Clear Map - incinerate located controls
-                                foreach (Control control in badControls) {
-                                    BackgroundPanel.Controls.Remove(control);
-                                    control.Dispose();
-                                }*/
+                                // Clear map
                                 foreach (Control control in MapPanel.Controls)
                                     control.Dispose();
                                 Invoke(MapPanel.Controls.Clear);
@@ -128,15 +116,45 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-
-                    // object placed on map
+                    // Object placed on map
                     case 211: {
-                            byte[] data = new byte[5]; //y x color(rgb)
-                            if (ReadBuffer(data))
-                                Invoke(map[data[0], data[1]].PlaceObject, Color.FromArgb(255, data[2], data[3], data[4]));
+                            int type = ReadByte();
+                            switch (type) {
+                                // Place settler
+                                case 0:
+                                case 1: {
+                                        byte[] data = new byte[5]; // y x color(rgb)
+                                        if (ReadBuffer(data))
+                                            Invoke(map[data[0], data[1]].PlaceSettler, Color.FromArgb(255, data[2], data[3], data[4]), type == 1);
+                                        break;
+                                    }
+
+                                // no available data??
+                                case -1: {
+                                        break;
+                                    }
+
+                                // Place resource
+                                default: {
+                                        byte[] data = new byte[2]; // y x
+                                        if (ReadBuffer(data))
+                                            Invoke(map[data[0], data[1]].PlaceResource, type - 2);
+                                        break;
+                                    }   
+                            }
                             break;
                         }
 
+                    // Clear map
+                    case 212: {
+                            Invoke(ClearMap);
+                            break;
+                        }
+
+                    // Game end
+                    case 213: {
+                            break;
+                        }
 
                     // player received
                     case 220: {
@@ -146,13 +164,11 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-
                     // empty buffer
                     case -1: {
                             await Task.Delay(200);
                             break;
                         }
-
 
                     // bad buffer
                     default: {
@@ -165,6 +181,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             }
         }
 
+        // Data management over network handling
         int ReadByte() {
             try {
                 return stream.ReadByte();
@@ -184,6 +201,12 @@ namespace Blue_Lagoon___Chaos_Edition {
                 return false;
             }
         }
+        public void HexClickEvent(object? sender, MouseEventArgs args) {
+            if (sender is Hexagon) {
+                Hexagon hex = (Hexagon)sender;
+                stream.Write([200, Convert.ToByte(args.Button != MouseButtons.Left), (byte)hex.y, (byte)hex.x]);
+            }
+        }
 
         void ExitGame() {
             stream?.Close();
@@ -192,10 +215,11 @@ namespace Blue_Lagoon___Chaos_Edition {
             Invoke(mainMenu.Show);
             Invoke(this.Close);
         }
-
     }
 
     public class Hexagon : PictureBox {
+        static readonly Bitmap[] ResourceTypes = [Resources.resStatulette, Resources.resWood, Resources.resStone, Resources.resFish, Resources.resMeat, Resources.resWheat];
+
         public static Game game;
         public static Region region;
         
@@ -217,15 +241,15 @@ namespace Blue_Lagoon___Chaos_Edition {
             baseImage = Game.hexImages[hexType];
             Clear();
 
-            this.Click += game.HexClickEvent;
+            this.MouseClick += game.HexClickEvent;
         }
 
+        // Functions to modify hexagon
         public void Clear() {
             this.Image = baseImage;
-        }
-
-        public void PlaceObject(Color color) {
-            Bitmap settler = Resources.settler;
+        }        
+        public void PlaceSettler(Color color, bool village) {
+            Bitmap settler = village ? Resources.village : Resources.settler;
             Bitmap img = (Bitmap)baseImage.Clone();
             
             for (int y = 0; y < img.Height; y++) {
@@ -233,6 +257,20 @@ namespace Blue_Lagoon___Chaos_Edition {
                     Color pixel = settler.GetPixel(x, y);
                     if (pixel.A == 255)
                         img.SetPixel(x, y, pixel.Equals(Color.FromArgb(255, 255, 255, 255)) ? color : pixel);
+                }
+            }
+
+            this.Image = img;
+        }
+        public void PlaceResource(int type) {
+            Bitmap resource = ResourceTypes[type];
+            Bitmap img = (Bitmap)baseImage.Clone();
+
+            for (int y = 0; y < img.Height; y++) {
+                for (int x = 0; x < img.Width; x++) {
+                    Color pixel = resource.GetPixel(x, y);
+                    if (pixel.A == 255)
+                        img.SetPixel(x, y, pixel);
                 }
             }
 

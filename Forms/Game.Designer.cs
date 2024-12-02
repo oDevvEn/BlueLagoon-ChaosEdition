@@ -86,6 +86,6 @@
 
         internal TableLayoutPanel BackgroundPanel;
         internal TableLayoutPanel tableLayoutPanel3;
-        private Panel MapPanel;
+        public Panel MapPanel;
     }
 }

@@ -130,7 +130,28 @@
   <data name="hexWater" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\hexWater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="resFish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resFish.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resMeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resMeat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resStatulette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resStatulette.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resStone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resStone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resWheat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resWheat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resWood" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\resWood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="settler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\settler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="village" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\village.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
