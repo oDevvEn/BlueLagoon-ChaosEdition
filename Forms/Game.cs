@@ -153,16 +153,43 @@ namespace Blue_Lagoon___Chaos_Edition {
 
                     // Game end
                     case 213: {
+                            MapPanel.Controls.Clear();
                             break;
                         }
 
-                    // player received
+
+                    // Player joined
                     case 220: {
                             byte[] buffer = new byte[128];
                             if (ReadBuffer(buffer)) 
                                 Invoke(AddPlayerName, Encoding.Unicode.GetString(buffer));
+
                             break;
                         }
+
+                    // Player left
+                    case 221: {
+                            int index = ReadByte();
+                            if (index != -1)
+                                Invoke(tableLayoutPanel3.GetControlFromPosition(0, index).Dispose);
+
+                            break;
+                        }
+
+                    // Player turn
+                    case 222: {
+                            int index = ReadByte();
+                            
+                            if (index != -1) {
+                                for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
+                                    Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
+                                    label.ForeColor = index == i ? Color.Green : Color.Black;
+                                }
+                            }
+
+                            break;
+                        }
+
 
                     // empty buffer
                     case -1: {
