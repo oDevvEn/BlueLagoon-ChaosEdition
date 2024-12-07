@@ -1,25 +1,29 @@
 ﻿using Blue_Lagoon___Chaos_Edition.Properties;
-using System.Diagnostics;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
 
 namespace Blue_Lagoon___Chaos_Edition {
     public partial class Game : Form {
-        readonly static int displaySize = Screen.PrimaryScreen.Bounds.Size.Height * 17 / 13;
-        public readonly static Bitmap[] hexImages = [Resources.hexWater, Resources.hexLand, Resources.hexSnow, Resources.hexDesert];
+        #region Variables
+        // Const references
         public static Form mainMenu;
+        public static int displaySize;
+        public readonly static Bitmap[] hexImages = [Resources.hexWater, Resources.hexLand, Resources.hexSnow, Resources.hexDesert];
 
+        // Networking variables
         byte[] username;
         TcpClient client;
         NetworkStream stream;
-        bool done = false;
+        
+        // Map/Display variables
         Hexagon[,] map;
         int mapSize;
         int displayY;
+        
+        // Hex configuration variables
         public Size hexSize;
-        public Point GetHexPosition(int y, int x) => new Point(x // no complex mathematics done here
+        public Point GetHexPosition(int y, int x) => MapPanel.PointToClient(new Point(x // no complex mathematics done here
             * displaySize / mapSize + 
   (y % 2 
                                                                  == 
@@ -33,11 +37,12 @@ namespace Blue_Lagoon___Chaos_Edition {
                                                       * 
                                             13 
       / (mapSize
-                                                                              * 18) + displayY);
+                                                                              * 18) + displayY));
+        #endregion
 
         public Game(string username, string ipAddress, int port) {
             InitializeComponent(); // wat dis
-
+            
             Hexagon.game = this;
             this.username = Encoding.Unicode.GetBytes(username);
             if (ConnectServer(ipAddress, port))
@@ -46,6 +51,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                 ExitGame();
         }
 
+        #region Main Thread Stuff
         // i love when i have to actually use main thread to manage "stuff" (an excellent word to describe everything)
         void AddPlayerName(string name) {
             Label lbl = new Label();
@@ -62,13 +68,14 @@ namespace Blue_Lagoon___Chaos_Edition {
                     map[y, x] = hex;
                 }
             }
-            done = true;
         }
         void ClearMap() {
             foreach (Hexagon hex in map)
                 hex.Clear();
         }
+        #endregion
 
+        #region Main Networking
         bool ConnectServer(string ipAddress, int port) {
             try {
                 client = new TcpClient(ipAddress, port);
@@ -81,15 +88,16 @@ namespace Blue_Lagoon___Chaos_Edition {
                 return false;
             }
         }
-
         async void HandleData() {
             while (client.Connected) {
                 int dataType = ReadByte();
                 switch (dataType) {
+                    #region Map Handling & Game State
                     // Map receieved
                     case 210: {
+                            // Setup constants
                             mapSize = ReadByte();
-                            displayY = (Screen.PrimaryScreen.Bounds.Size.Height - displaySize * (mapSize - 1) * 13 / (mapSize * 18) - displaySize / mapSize) / 2;
+                            displayY = (mainMenu.Size.Height - displaySize * (mapSize - 1) * 13 / (mapSize * 18) - displaySize / mapSize) / 2;
                             hexSize = new Size(displaySize / mapSize, displaySize / mapSize);
 
                             byte[] mapData = new byte[mapSize * mapSize];
@@ -98,11 +106,11 @@ namespace Blue_Lagoon___Chaos_Edition {
                                 map = new Hexagon[mapSize, mapSize];
                                 GraphicsPath graphicsPath = new GraphicsPath();
                                 graphicsPath.AddPolygon(new Point[6] { new Point(hexSize.Width/2, 0),
-                                                                       new Point(hexSize.Width, hexSize.Height / 4),
-                                                                       new Point(hexSize.Width, hexSize.Height * 3 / 4),
-                                                                       new Point(hexSize.Width/2, hexSize.Height),
-                                                                       new Point(0, hexSize.Height * 3 / 4),
-                                                                       new Point(0, hexSize.Height / 4) });
+                                                                        new Point(hexSize.Width, hexSize.Height / 4),
+                                                                        new Point(hexSize.Width, hexSize.Height * 3 / 4),
+                                                                        new Point(hexSize.Width/2, hexSize.Height),
+                                                                        new Point(0, hexSize.Height * 3 / 4),
+                                                                        new Point(0, hexSize.Height / 4) });
                                 Hexagon.region = new Region(graphicsPath);
 
                                 // Clear map
@@ -140,34 +148,47 @@ namespace Blue_Lagoon___Chaos_Edition {
                                         if (ReadBuffer(data))
                                             Invoke(map[data[0], data[1]].PlaceResource, type - 2);
                                         break;
-                                    }   
+                                    }
                             }
                             break;
                         }
 
-                    // Clear map
+                    // Clear map -- Settlement Phase time
                     case 212: {
+                            // Display leaderboard
+                            byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
+                            if (ReadBuffer(scores))
+                                new Leaderboard(this, scores).ShowDialog();
+
+                            // Clean map to only have empty hexes
                             Invoke(ClearMap);
                             break;
                         }
 
                     // Game end
                     case 213: {
+                            // Display leaderboard
+                            byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
+                            if (ReadBuffer(scores))
+                                new Leaderboard(this, scores).ShowDialog();
+
+                            // Clear map display
                             MapPanel.Controls.Clear();
                             break;
                         }
+                    #endregion
 
-
-                    // Player joined
+                    #region Player Handling
+                    // Player joined -- add to list
                     case 220: {
                             byte[] buffer = new byte[128];
-                            if (ReadBuffer(buffer)) 
+                            if (ReadBuffer(buffer))
                                 Invoke(AddPlayerName, Encoding.Unicode.GetString(buffer));
 
                             break;
                         }
 
-                    // Player left
+                    // Player left -- remove from list
                     case 221: {
                             int index = ReadByte();
                             if (index != -1)
@@ -176,39 +197,58 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-                    // Player turn
+                    // Player turn updadte
                     case 222: {
-                            int index = ReadByte();
-                            
-                            if (index != -1) {
-                                for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
-                                    Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
-                                    label.ForeColor = index == i ? Color.Green : Color.Black;
+                                int index = ReadByte();
+
+                                if (index != -1) {
+                                    for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
+                                        Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
+                                        label.ForeColor = index == i ? Color.Green : Color.Black;
+                                    }
                                 }
+
+                                break;
                             }
+                    #endregion
+
+                    // todo
+                    #region Display Update
+                    case 230: {
 
                             break;
                         }
+                    #endregion
 
+                    // todo
+                    #region Statistics Handling
+                    case 240: {
+                            break;
+                        }
+                    
+                    #endregion
 
+                    #region Other
                     // empty buffer
                     case -1: {
                             await Task.Delay(200);
                             break;
                         }
 
-                    // bad buffer
+                    // bad buffer -- clear it
                     default: {
                             while (ReadByte() != -1)
                                 continue;
 
                             break;
                         }
+                    #endregion
                 }
             }
         }
+        #endregion
 
-        // Data management over network handling
+        #region Networking Data Handling Functions
         int ReadByte() {
             try {
                 return stream.ReadByte();
@@ -242,36 +282,40 @@ namespace Blue_Lagoon___Chaos_Edition {
             Invoke(mainMenu.Show);
             Invoke(this.Close);
         }
+        #endregion
     }
 
     public class Hexagon : PictureBox {
+        #region Variables
+        // Const refernece variables
         static readonly Bitmap[] ResourceTypes = [Resources.resStatulette, Resources.resWood, Resources.resStone, Resources.resFish, Resources.resMeat, Resources.resWheat];
-
         public static Game game;
         public static Region region;
         
+        // Hex data
         Bitmap baseImage;
         public int y;
         public int x;
+        #endregion
 
         public Hexagon(int y, int x, int hexType) : base() {
+            // Hex data variable
             this.y = y;
             this.x = x;
-
-            this.Size = game.hexSize;
-            this.Location = game.GetHexPosition(y, x);
-            this.Region = region;
-
-            //this.Visible = false;
-            this.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.BackColor = Color.Transparent;
             baseImage = Game.hexImages[hexType];
             Clear();
 
+            // Hex configuration
+            this.Size = game.hexSize;
+            this.Location = game.GetHexPosition(y, x);
+            this.Region = region;
+            this.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.BackColor = Color.Transparent;
+
             this.MouseClick += game.HexClickEvent;
         }
-
-        // Functions to modify hexagon
+        
+        #region Hex Modifying
         public void Clear() {
             this.Image = baseImage;
         }        
@@ -303,5 +347,6 @@ namespace Blue_Lagoon___Chaos_Edition {
 
             this.Image = img;
         }
+        #endregion
     }
 }

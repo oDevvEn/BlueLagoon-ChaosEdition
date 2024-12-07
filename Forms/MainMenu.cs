@@ -3,6 +3,7 @@
         public MainMenu() {
             InitializeComponent();
             Game.mainMenu = this;
+            Game.displaySize = this.Size.Height * 17 / 13;
         }
 
         private void QuitButton_Click(object sender, EventArgs e) {

@@ -27,8 +27,7 @@
             StatisticsButton = new Button();
             QuitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
-            label1 = new Label();
-            label2 = new Label();
+            GameTitle = new Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,13 +82,13 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
             tableLayoutPanel1.Controls.Add(QuitButton, 1, 5);
             tableLayoutPanel1.Controls.Add(StatisticsButton, 1, 4);
-            tableLayoutPanel1.Controls.Add(label1, 2, 6);
             tableLayoutPanel1.Controls.Add(PlayButton, 1, 3);
-            tableLayoutPanel1.Controls.Add(label2, 1, 1);
+            tableLayoutPanel1.Controls.Add(GameTitle, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RightToLeft = RightToLeft.No;
             tableLayoutPanel1.RowCount = 7;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10.6666651F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 21.33333F));
@@ -102,30 +101,19 @@
             tableLayoutPanel1.Size = new Size(800, 600);
             tableLayoutPanel1.TabIndex = 4;
             // 
-            // label1
+            // GameTitle
             // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            label1.AutoSize = true;
-            label1.Location = new Point(526, 585);
-            label1.Name = "label1";
-            label1.Size = new Size(271, 15);
-            label1.TabIndex = 4;
-            label1.Text = "game only tested with 16:9 screen ratio (1366x768)";
-            label1.TextAlign = ContentAlignment.BottomRight;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Dock = DockStyle.Fill;
-            label2.Font = new Font("Segoe UI", 95F, FontStyle.Regular, GraphicsUnit.Document);
-            label2.Location = new Point(85, 68);
-            label2.Margin = new Padding(5);
-            label2.Name = "label2";
-            label2.Size = new Size(230, 117);
-            label2.TabIndex = 5;
-            label2.Text = "Blue Lagoon (Chaos Edition)";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            GameTitle.AutoSize = true;
+            GameTitle.BackColor = Color.Transparent;
+            GameTitle.Dock = DockStyle.Fill;
+            GameTitle.Font = new Font("Segoe UI", 95F, FontStyle.Regular, GraphicsUnit.Document);
+            GameTitle.Location = new Point(85, 68);
+            GameTitle.Margin = new Padding(5);
+            GameTitle.Name = "GameTitle";
+            GameTitle.Size = new Size(230, 117);
+            GameTitle.TabIndex = 5;
+            GameTitle.Text = "Blue Lagoon (Chaos Edition)";
+            GameTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MainMenu
             // 
@@ -148,7 +136,6 @@
         private Button StatisticsButton;
         private Button QuitButton;
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label1;
-        private Label label2;
+        private Label GameTitle;
     }
 }
