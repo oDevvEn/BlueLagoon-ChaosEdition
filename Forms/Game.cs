@@ -220,9 +220,12 @@ namespace Blue_Lagoon___Chaos_Edition {
                         }
                     #endregion
 
-                    // todo
                     #region Statistics Handling
                     case 240: {
+                            int type = ReadByte();
+                            if (type != -1)
+                                Statistics.IncrementStatistic(type);
+
                             break;
                         }
                     
