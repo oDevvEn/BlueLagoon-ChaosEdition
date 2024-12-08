@@ -1,21 +1,51 @@
+using System.Reflection;
 using System.Text.Json;
 
 namespace Blue_Lagoon___Chaos_Edition {
     internal static class Program {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main() {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            // no idea what you are
             ApplicationConfiguration.Initialize();
+
+            // Setup statistics
+            Statistics statistics = File.Exists("statistics.json") ?
+                JsonSerializer.Deserialize<Statistics>(File.ReadAllText("statistics.json"), new JsonSerializerOptions { IncludeFields = true }) ?? new Statistics() 
+                : new Statistics();
+            Statistics.statistics = statistics;
+
+            // Setup statistics pointers
+            unsafe {
+                fixed (int* p0 = &statistics.settlersPlaced,
+                        p1 = &statistics.villagesPlaced,
+                        p2 = &statistics.serversJoined,
+                        p3 = &statistics.gamesPlayed,
+                        p4 = &statistics.explorationPhasesWon,
+                        p5 = &statistics.explorationPhasesLost,
+                        p6 = &statistics.settlementPhasesWon,
+                        p7 = &statistics.settlementPhasesLost,
+                        p8 = &statistics.settlementPhasesUnplayable) {
+                    Statistics.pointers = [p0, p1, p2, p3, p4, p5, p6, p7, p8];
+                }
+            }
+
+            // Main Menu, I choose you!
             Application.Run(new MainMenu());
         }
     }
 
-    // I couldn't serialize a static class easily
-    class StatisticsValues {
+    // I couldn't serialize a static class easily so we have a mix here
+    class Statistics {
+        #region Static Variables
+        // Const references
+        static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions { IncludeFields = true, WriteIndented = true };
+        public static Statistics statistics;
+
+        // Pointers to statistical variables used in incrementing
+        public static unsafe int*[] pointers;
+        #endregion
+
+        #region Statistic Variabels
         public int settlersPlaced = 0;
         public int villagesPlaced = 0;
 
@@ -28,32 +58,10 @@ namespace Blue_Lagoon___Chaos_Edition {
         public int settlementPhasesWon = 0;
         public int settlementPhasesLost = 0;
         public int settlementPhasesUnplayable = 0;
-    }
-    static class Statistics {
-        #region Variables
-        // Const refernences
-        static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions { IncludeFields = true, WriteIndented = true };
-        static readonly StatisticsValues values = File.Exists("statistics.json") ?  JsonSerializer.Deserialize<StatisticsValues>(File.ReadAllText("statistics.json"), new JsonSerializerOptions { IncludeFields = true }) 
-                                                                                 ?? new StatisticsValues() 
-                                                                                 :  new StatisticsValues();
-        // References to variables (to use in updating)
-        static unsafe int*[] pointers;
-        static unsafe Statistics() { // beautiful
-            fixed (int* p0 = &values.settlersPlaced,
-                        p1 = &values.villagesPlaced,
-                        p2 = &values.serversJoined,
-                        p3 = &values.gamesPlayed,
-                        p4 = &values.explorationPhasesWon,
-                        p5 = &values.explorationPhasesLost,
-                        p6 = &values.settlementPhasesWon,
-                        p7 = &values.settlementPhasesLost,
-                        p8 = &values.settlementPhasesUnplayable) {
-                pointers = [p0, p1, p2, p3, p4, p5, p6, p7, p8];
-            }
-        }
         #endregion
 
-        #region Statistics Increment & Store Function
+        #region Statistics Function
+        // Increment & Store Statistics
         public static void IncrementStatistic(int type) {
             if (0 <= type && type < pointers.Length) {
                 // Increment
@@ -62,9 +70,12 @@ namespace Blue_Lagoon___Chaos_Edition {
                 }
 
                 // Save changes to file
-                File.WriteAllText("statistics.json", JsonSerializer.Serialize(values, jsonOptions));
+                File.WriteAllText("statistics.json", JsonSerializer.Serialize(statistics, jsonOptions));
             }
         }
+
+        // Get statistics
+        public static unsafe string GetStatistic(int type) => (*pointers[type]).ToString();
         #endregion
     }
 }

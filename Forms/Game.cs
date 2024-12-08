@@ -23,7 +23,7 @@ namespace Blue_Lagoon___Chaos_Edition {
         
         // Hex configuration variables
         public Size hexSize;
-        public Point GetHexPosition(int y, int x) => MapPanel.PointToClient(new Point(x // no complex mathematics done here
+        public Point GetHexPosition(int y, int x) => new Point(x // no complex mathematics done here
             * displaySize / mapSize + 
   (y % 2 
                                                                  == 
@@ -37,13 +37,17 @@ namespace Blue_Lagoon___Chaos_Edition {
                                                       * 
                                             13 
       / (mapSize
-                                                                              * 18) + displayY));
+                                                                              * 18) + displayY);
         #endregion
 
         public Game(string username, string ipAddress, int port) {
             InitializeComponent(); // wat dis
-            
+
+            // Setup const references
+            displaySize = mainMenu.Size.Height * 17 / 13;
             Hexagon.game = this;
+
+            // Networking Setup
             this.username = Encoding.Unicode.GetBytes(username);
             if (ConnectServer(ipAddress, port))
                 Task.Run(HandleData);
