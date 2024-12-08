@@ -2,6 +2,9 @@ using System.Text.Json;
 
 namespace Blue_Lagoon___Chaos_Edition {
     internal static class Program {
+        public static float scale;
+        public static SizeF scaleSizeF;
+
         [STAThread]
         static void Main() {
             // no idea what you are

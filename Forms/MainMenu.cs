@@ -23,8 +23,9 @@ namespace Blue_Lagoon___Chaos_Edition {
             if (connectionInfo.successful) {
                 Game game = new Game(connectionInfo.username.Text, connectionInfo.ipAddress.Text, int.Parse(connectionInfo.port.Text));
                 if (!game.IsDisposed) {
-                    game.Show();
                     this.Hide();
+                    game.ShowDialog();
+                    this.Show();
                 }
             }
         }
@@ -94,20 +95,22 @@ namespace Blue_Lagoon___Chaos_Edition {
         #endregion
 
         #region Scale UI
-        float scale;
         void LoopScaleControlFonts(Control controls) {
             foreach (Control control in controls.Controls) {
                 if (control is Button || control is Label)
-                    control.Font = new Font(control.Font.FontFamily, control.Font.Size * scale);
+                    control.Font = new Font(control.Font.FontFamily, control.Font.Size * Program.scale);
             }
         }
         private void MainMenu_Load(object sender, EventArgs e) {
+            // Calculate scale
+            Program.scale = MathF.Min(this.Size.Width / 1280f, this.Size.Height / 720f) * 96f / (this.DeviceDpi * 1.05f);
+            Program.scaleSizeF = new SizeF(Program.scale, Program.scale);
+
             // Setup BackgroundPanel
             BackgroundPanel.Size = new Size(this.Size.Width * 2, this.Size.Height);
             BackgroundPanel.Location = new Point(0,0); // idk if require didn't test :p
 
-            // Scale fonts of labels/buttons
-            scale = MathF.Min(this.Size.Width / 1280f, this.Size.Height / 720f) * 96f / (this.DeviceDpi * 1.05f);
+            // Scale components
             LoopScaleControlFonts(MainMenuPanel);
             LoopScaleControlFonts(StatisticsPanel);
         }

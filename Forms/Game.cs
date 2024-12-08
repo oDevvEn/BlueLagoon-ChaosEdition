@@ -292,8 +292,8 @@ namespace Blue_Lagoon___Chaos_Edition {
             client?.Close();
 
             // Go back to main menu
-            Invoke(mainMenu.Show);
-            Invoke(this.Close);
+            try { this.Close(); }
+            catch { Invoke(this.Close); }
         }
         #endregion
     }

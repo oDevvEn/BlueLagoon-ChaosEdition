@@ -5,6 +5,12 @@
         public GetConnectionInfo() {
             InitializeComponent();
 
+            // Scale UI
+            this.Scale(Program.scaleSizeF);
+            foreach (Control control in this.Controls)
+                if (control is Label || control is TextBox || control is Button)
+                    control.Font = new Font(control.Font.FontFamily, control.Font.Size * Program.scale);
+            
             if (File.Exists("server.txt")) {
                 // Retrieve data from file
                 string[] text = File.ReadAllLines("server.txt");
