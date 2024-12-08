@@ -256,6 +256,9 @@ namespace Blue_Lagoon___Chaos_Edition {
                     #endregion
                 }
             }
+
+            // client no longer connected or something
+            ExitGame();
         }
         #endregion
 
