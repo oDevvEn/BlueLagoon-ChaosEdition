@@ -15,8 +15,11 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Play
         private void PlayButton_Click(object sender, EventArgs e) {
+            // Get connection information
             GetConnectionInfo connectionInfo = new GetConnectionInfo();
             connectionInfo.ShowDialog();
+
+            // Attempt to connect
             if (connectionInfo.successful) {
                 Game game = new Game(connectionInfo.username.Text, connectionInfo.ipAddress.Text, int.Parse(connectionInfo.port.Text));
                 if (!game.IsDisposed) {
@@ -29,18 +32,34 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Statistics
         private void StatisticsButton_Click(object sender, EventArgs e) {
-            #region Update statistics labels 
-            // sorry couldn't think of a better method
+            #region Update statistics labels
             if (sender == StatisticsButton) {
-                SettlersPlacedText.Text             = "Settlers Placed:              " + Statistics.GetStatistic(0);
-                VillagesPlacedText.Text             = "Villages Placed:              " + Statistics.GetStatistic(1);
-                ServersJoinedText.Text              = "Servers Joined:               " + Statistics.GetStatistic(2);
-                GamesPlayedText.Text                = "Games Played:                 " + Statistics.GetStatistic(3);
-                ExplorationPhasesWonText.Text       = "Exploration Phases Won:       " + Statistics.GetStatistic(4);
-                ExplorationPhasesLostText.Text      = "Exploration Phases Lost:      " + Statistics.GetStatistic(5);
-                SettlementPhasesWonText.Text        = "Settlment Phases Won:         " + Statistics.GetStatistic(6);
-                SettlementPhasesLostText.Text       = "Settlement Phases Lost:       " + Statistics.GetStatistic(7);
-                SettlementPhasesUnplayableText.Text = "Settlement Phases Unplayable: " + Statistics.GetStatistic(8);
+                // Find longest statistic length
+                int len = 0;
+                int[] statisticsLengths = new int[9];
+                for (int i = 0; i < 9; i++) {
+                    // Get length
+                    int _len = Statistics.GetStatistic(i).Length;
+                    statisticsLengths[i] = _len;
+                    
+                    // Find largest length
+                    if (_len > len)
+                        len = _len;
+                }
+
+                // Spacing between text and statistic function
+                string GetSpacing(int statistic) => new string(' ', len - statisticsLengths[statistic]);
+
+                // Set statistics texts - couldn't think of a better solution
+                SettlersPlacedText.Text             = $"Settlers Placed:              {GetSpacing(0)}{Statistics.GetStatistic(0)}";
+                VillagesPlacedText.Text             = $"Villages Placed:              {GetSpacing(1)}{Statistics.GetStatistic(1)}";
+                ServersJoinedText.Text              = $"Servers Joined:               {GetSpacing(2)}{Statistics.GetStatistic(2)}";
+                GamesPlayedText.Text                = $"Games Played:                 {GetSpacing(3)}{Statistics.GetStatistic(3)}";
+                ExplorationPhasesWonText.Text       = $"Exploration Phases Won:       {GetSpacing(4)}{Statistics.GetStatistic(4)}";
+                ExplorationPhasesLostText.Text      = $"Exploration Phases Lost:      {GetSpacing(5)}{Statistics.GetStatistic(5)}";
+                SettlementPhasesWonText.Text        = $"Settlment Phases Won:         {GetSpacing(6)}{Statistics.GetStatistic(6)}";
+                SettlementPhasesLostText.Text       = $"Settlement Phases Lost:       {GetSpacing(7)}{Statistics.GetStatistic(7)}";
+                SettlementPhasesUnplayableText.Text = $"Settlement Phases Unplayable: {GetSpacing(8)}{Statistics.GetStatistic(8)}";
             }
             #endregion
 
@@ -76,7 +95,7 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Scale UI
         float scale;
-        void LoopControlFonts(Control controls) {
+        void LoopScaleControlFonts(Control controls) {
             foreach (Control control in controls.Controls) {
                 if (control is Button || control is Label)
                     control.Font = new Font(control.Font.FontFamily, control.Font.Size * scale);
@@ -89,8 +108,8 @@ namespace Blue_Lagoon___Chaos_Edition {
 
             // Scale fonts of labels/buttons
             scale = MathF.Min(this.Size.Width / 1280f, this.Size.Height / 720f) * 96f / (this.DeviceDpi * 1.05f);
-            LoopControlFonts(MainMenuPanel);
-            LoopControlFonts(StatisticsPanel);
+            LoopScaleControlFonts(MainMenuPanel);
+            LoopScaleControlFonts(StatisticsPanel);
         }
         #endregion
     }

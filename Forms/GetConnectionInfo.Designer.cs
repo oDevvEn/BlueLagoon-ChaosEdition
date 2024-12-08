@@ -95,8 +95,9 @@
             port.Size = new Size(65, 32);
             port.TabIndex = 5;
             port.TextAlign = HorizontalAlignment.Center;
+            port.TextChanged += port_TextChanged;
             // 
-            // GetUsername
+            // GetConnectionInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -110,7 +111,7 @@
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MaximumSize = new Size(400, 250);
             MinimumSize = new Size(400, 250);
-            Name = "GetUsername";
+            Name = "GetConnectionInfo";
             Text = "Blue Lagoon - Chaos Edition";
             ResumeLayout(false);
             PerformLayout();

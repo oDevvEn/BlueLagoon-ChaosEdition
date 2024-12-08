@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text.Json;
 
 namespace Blue_Lagoon___Chaos_Edition {
@@ -14,23 +13,23 @@ namespace Blue_Lagoon___Chaos_Edition {
                 : new Statistics();
             Statistics.statistics = statistics;
 
-            // Setup statistics pointers
             unsafe {
+                // Setup statistics pointers
                 fixed (int* p0 = &statistics.settlersPlaced,
-                        p1 = &statistics.villagesPlaced,
-                        p2 = &statistics.serversJoined,
-                        p3 = &statistics.gamesPlayed,
-                        p4 = &statistics.explorationPhasesWon,
-                        p5 = &statistics.explorationPhasesLost,
-                        p6 = &statistics.settlementPhasesWon,
-                        p7 = &statistics.settlementPhasesLost,
-                        p8 = &statistics.settlementPhasesUnplayable) {
+                            p1 = &statistics.villagesPlaced,
+                            p2 = &statistics.serversJoined,
+                            p3 = &statistics.gamesPlayed,
+                            p4 = &statistics.explorationPhasesWon,
+                            p5 = &statistics.explorationPhasesLost,
+                            p6 = &statistics.settlementPhasesWon,
+                            p7 = &statistics.settlementPhasesLost,
+                            p8 = &statistics.settlementPhasesUnplayable) {
                     Statistics.pointers = [p0, p1, p2, p3, p4, p5, p6, p7, p8];
+
+                    // Main Menu, I choose you!
+                    Application.Run(new MainMenu());
                 }
             }
-
-            // Main Menu, I choose you!
-            Application.Run(new MainMenu());
         }
     }
 
@@ -45,7 +44,7 @@ namespace Blue_Lagoon___Chaos_Edition {
         public static unsafe int*[] pointers;
         #endregion
 
-        #region Statistic Variabels
+        #region Statistics Variables
         public int settlersPlaced = 0;
         public int villagesPlaced = 0;
 
@@ -60,13 +59,13 @@ namespace Blue_Lagoon___Chaos_Edition {
         public int settlementPhasesUnplayable = 0;
         #endregion
 
-        #region Statistics Function
-        // Increment & Store Statistics
+        #region Statistics Functions
+        // Increment Statistic & Store Statistics
         public static void IncrementStatistic(int type) {
             if (0 <= type && type < pointers.Length) {
-                // Increment
+                // Increment variable
                 unsafe {
-                    pointers[type]++;
+                    (*pointers[type])++;
                 }
 
                 // Save changes to file
@@ -74,8 +73,8 @@ namespace Blue_Lagoon___Chaos_Edition {
             }
         }
 
-        // Get statistics
-        public static unsafe string GetStatistic(int type) => (*pointers[type]).ToString();
+        // Get statistic
+        public static unsafe string GetStatistic(int type) => (*pointers[type]).ToString(); 
         #endregion
     }
 }

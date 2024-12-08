@@ -82,9 +82,11 @@ namespace Blue_Lagoon___Chaos_Edition {
         #region Main Networking
         bool ConnectServer(string ipAddress, int port) {
             try {
+                // Connect to server
                 client = new TcpClient(ipAddress, port);
                 stream = client.GetStream();
 
+                // Send username
                 stream.Write(username, 0, username.Length);
                 return true;
             }
@@ -176,8 +178,10 @@ namespace Blue_Lagoon___Chaos_Edition {
                             if (ReadBuffer(scores))
                                 new Leaderboard(this, scores).ShowDialog();
 
-                            // Clear map display
+                            // Clear map
                             MapPanel.Controls.Clear();
+                            foreach (Hexagon hex in map)
+                                hex.Dispose();
                             break;
                         }
                     #endregion
@@ -201,18 +205,18 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-                    // Player turn updadte
+                    // Player turn update
                     case 222: {
-                                int index = ReadByte();
+                            int index = ReadByte();
 
-                                if (index != -1) {
-                                    for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
-                                        Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
-                                        label.ForeColor = index == i ? Color.Green : Color.Black;
-                                    }
+                            if (index != -1) {
+                                for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
+                                    Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
+                                    label.ForeColor = index == i ? Color.Green : Color.Black;
                                 }
+                            }
 
-                                break;
+                            break;
                             }
                     #endregion
 
@@ -283,9 +287,11 @@ namespace Blue_Lagoon___Chaos_Edition {
         }
 
         void ExitGame() {
+            // Close connection
             stream?.Close();
             client?.Close();
 
+            // Go back to main menu
             Invoke(mainMenu.Show);
             Invoke(this.Close);
         }
@@ -327,9 +333,11 @@ namespace Blue_Lagoon___Chaos_Edition {
             this.Image = baseImage;
         }        
         public void PlaceSettler(Color color, bool village) {
+            // Image variables
             Bitmap settler = village ? Resources.village : Resources.settler;
             Bitmap img = (Bitmap)baseImage.Clone();
             
+            // Add settler/village to hex and replace background color of settler/village to client's color during this process
             for (int y = 0; y < img.Height; y++) {
                 for (int x = 0; x < img.Width; x++) {
                     Color pixel = settler.GetPixel(x, y);
@@ -338,12 +346,15 @@ namespace Blue_Lagoon___Chaos_Edition {
                 }
             }
 
+            // Set hex's image to newly crafted image with settler/village
             this.Image = img;
         }
         public void PlaceResource(int type) {
+            // Image variables
             Bitmap resource = ResourceTypes[type];
             Bitmap img = (Bitmap)baseImage.Clone();
 
+            // Add resource to hex
             for (int y = 0; y < img.Height; y++) {
                 for (int x = 0; x < img.Width; x++) {
                     Color pixel = resource.GetPixel(x, y);
@@ -352,6 +363,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                 }
             }
 
+            // Set hex's image to newly crafted image
             this.Image = img;
         }
         #endregion
