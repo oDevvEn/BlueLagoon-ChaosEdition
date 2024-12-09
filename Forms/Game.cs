@@ -15,27 +15,27 @@ namespace Blue_Lagoon___Chaos_Edition {
         byte[] username;
         TcpClient client;
         NetworkStream stream;
-        
+
         // Map/Display variables
         Hexagon[,] map;
         int mapSize;
         int displayY;
-        
+
         // Hex configuration variables
         public Size hexSize;
         public Point GetHexPosition(int y, int x) => new Point(x // no complex mathematics done here
-            * displaySize / mapSize + 
-  (y % 2 
-                                                                 == 
-            
-             1 ? 
-                                displaySize / mapSize 
-   / 2 : 0) + 
+            * displaySize / mapSize +
+  (y % 2
+                                                                 ==
+
+             1 ?
+                                displaySize / mapSize
+   / 2 : 0) +
                                                         displayY - x,
-                                                                            y 
+                                                                            y
      * displaySize
-                                                      * 
-                                            13 
+                                                      *
+                                            13
       / (mapSize
                                                                               * 18) + displayY);
         #endregion
@@ -49,10 +49,12 @@ namespace Blue_Lagoon___Chaos_Edition {
 
             // Networking Setup
             this.username = Encoding.Unicode.GetBytes(username);
-            if (ConnectServer(ipAddress, port))
-                Task.Run(HandleData);
-            else
+            if (!ConnectServer(ipAddress, port))
                 ExitGame();
+        }
+        // This is done to prevent errors - adding items before window is loaded
+        private void Game_Load(object sender, EventArgs e) {
+            Task.Run(HandleData);
         }
 
         #region Main Thread Stuff
@@ -217,7 +219,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                             }
 
                             break;
-                            }
+                        }
                     #endregion
 
                     // todo
@@ -236,7 +238,7 @@ namespace Blue_Lagoon___Chaos_Edition {
 
                             break;
                         }
-                    
+
                     #endregion
 
                     #region Other
@@ -253,7 +255,7 @@ namespace Blue_Lagoon___Chaos_Edition {
 
                             break;
                         }
-                    #endregion
+                        #endregion
                 }
             }
 

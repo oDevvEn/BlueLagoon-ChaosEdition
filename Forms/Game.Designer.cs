@@ -78,6 +78,7 @@
             Name = "Game";
             Text = "Game";
             WindowState = FormWindowState.Maximized;
+            Load += Game_Load;
             BackgroundPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
