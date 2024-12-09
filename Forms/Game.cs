@@ -1,4 +1,5 @@
 ﻿using Blue_Lagoon___Chaos_Edition.Properties;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
@@ -40,6 +41,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                                                                               * 18) + displayY);
         #endregion
 
+        #region Launch - Setup "things" & Scale UI
         public Game(string username, string ipAddress, int port) {
             InitializeComponent(); // wat dis
 
@@ -52,18 +54,45 @@ namespace Blue_Lagoon___Chaos_Edition {
             if (!ConnectServer(ipAddress, port))
                 ExitGame();
         }
-        // This is done to prevent errors - adding items before window is loaded
         private void Game_Load(object sender, EventArgs e) {
+            // This is done here to prevent errors - adding items before window is loaded
             Task.Run(HandleData);
-        }
 
-        #region Main Thread Stuff
+            // Scale UI
+            foreach (Control control in ControlPanel.Controls)
+                if (control is Label || control is Button)
+                    Program.ScaleUI(control);
+        }
+        #endregion
+
+        #region Main Thread "Stuff"
         // i love when i have to actually use main thread to manage "stuff" (an excellent word to describe everything)
+
+        // Add player to player list
         void AddPlayerName(string name) {
             Label lbl = new Label();
+            Program.ScaleUI(lbl, 12f);
             lbl.Text = name;
             tableLayoutPanel3.Controls.Add(lbl);
         }
+
+        // Update settler/village counters
+        void UpdateCounter(int type, string count) {
+            // Update counter
+            if (type == 0)
+                SettlerCountText.Text = "Settler Count: " + count;
+            else if (type == 1)
+                VillageCountText.Text = "Village Count: " + count;
+
+            // Make texts inline with each other
+            int lenDiff = SettlerCountText.Text.Length - VillageCountText.Text.Length;
+            if (lenDiff > 0)
+                VillageCountText.Text = VillageCountText.Text[0..14] + new string(' ', lenDiff) + VillageCountText.Text[14..];
+            else if (lenDiff < 0)
+                SettlerCountText.Text = SettlerCountText.Text[0..14] + new string(' ', -lenDiff) + SettlerCountText.Text[14..];
+        }
+
+        // Render the whole map I think? idk
         void DrawMap(byte[] mapData) {
             int i = 0;
             for (int y = 0; y < mapSize; y++) {
@@ -75,6 +104,8 @@ namespace Blue_Lagoon___Chaos_Edition {
                 }
             }
         }
+
+        // Clears anything a hexagon may have on it, just leaving the bare map
         void ClearMap() {
             foreach (Hexagon hex in map)
                 hex.Clear();
@@ -181,9 +212,9 @@ namespace Blue_Lagoon___Chaos_Edition {
                                 new Leaderboard(this, scores).ShowDialog();
 
                             // Clear map
-                            MapPanel.Controls.Clear();
+                            Invoke(MapPanel.Controls.Clear);
                             foreach (Hexagon hex in map)
-                                hex.Dispose();
+                                Invoke(hex.Dispose);
                             break;
                         }
                     #endregion
@@ -222,9 +253,12 @@ namespace Blue_Lagoon___Chaos_Edition {
                         }
                     #endregion
 
-                    // todo
                     #region Display Update
                     case 230: {
+                            byte[] buffer = new byte[3]; // type, i/256, i%256
+                            if (ReadBuffer(buffer)) {
+                                Invoke(UpdateCounter, buffer[0], ((buffer[1] * 256) + buffer[2]).ToString());
+                            }
 
                             break;
                         }
@@ -287,10 +321,20 @@ namespace Blue_Lagoon___Chaos_Edition {
         public void HexClickEvent(object? sender, MouseEventArgs args) {
             if (sender is Hexagon) {
                 Hexagon hex = (Hexagon)sender;
-                stream.Write([200, Convert.ToByte(args.Button != MouseButtons.Left), (byte)hex.y, (byte)hex.x]);
+                try {
+                    stream.Write([200, Convert.ToByte(args.Button != MouseButtons.Left), (byte)hex.y, (byte)hex.x]);
+                }
+                catch {
+                    ExitGame();
+                }
             }
         }
+        #endregion
 
+        #region Quitting
+        private void LeaveButton_Click(object sender, EventArgs e) {
+            ExitGame();
+        }
         void ExitGame() {
             // Close connection
             stream?.Close();

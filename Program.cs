@@ -2,8 +2,18 @@ using System.Text.Json;
 
 namespace Blue_Lagoon___Chaos_Edition {
     internal static class Program {
+        #region UI Scaling
         public static float scale;
         public static SizeF scaleSizeF;
+        public static void ScaleUI(Control control) {
+            control.Font = new Font(control.Font.FontFamily, control.Font.Size * scale);
+            control.Margin = new Padding((int)(control.Margin.All * scale));
+        }
+        public static void ScaleUI(Control control, float fontSize) {
+            control.Font = new Font(control.Font.FontFamily, fontSize * scale);
+            control.Margin = new Padding((int)(control.Margin.All * scale));
+        }
+        #endregion
 
         [STAThread]
         static void Main() {

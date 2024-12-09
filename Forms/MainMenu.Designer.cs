@@ -346,7 +346,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2560, 720);
+            ClientSize = new Size(1386, 720);
             Controls.Add(BackgroundPanel);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MainMenu";

@@ -9,9 +9,9 @@ namespace Blue_Lagoon___Chaos_Edition {
             // Scale UI
             this.Scale(Program.scaleSizeF);
             WaitingBar.TextFont = new Font(WaitingBar.TextFont.FontFamily, WaitingBar.TextFont.Size * Program.scale);
-            LeaderboardLabel.Font = new Font(LeaderboardLabel.Font.FontFamily, LeaderboardLabel.Font.Size * Program.scale);
-            PlayerColumn.Font = new Font(PlayerColumn.Font.FontFamily, PlayerColumn.Font.Size * Program.scale);
-            ScoreColumn.Font = new Font(ScoreColumn.Font.FontFamily, ScoreColumn.Font.Size * Program.scale);
+            Program.ScaleUI(LeaderboardLabel);
+            Program.ScaleUI(PlayerColumn);
+            Program.ScaleUI(ScoreColumn);
 
             // Timer for progress bar (leaderboard only shown for 5 seconds)
             Timer timer = new Timer();
