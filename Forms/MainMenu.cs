@@ -1,5 +1,4 @@
-﻿using Blue_Lagoon___Chaos_Edition.Properties;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Blue_Lagoon___Chaos_Edition {
     public partial class MainMenu : Form {

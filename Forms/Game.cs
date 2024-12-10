@@ -192,8 +192,14 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-                    // Clear map -- Settlement Phase time
+                    // Natural disaster
                     case 212: {
+
+                            break;
+                        }
+
+                    // Clear map -- Settlement Phase time
+                    case 218: {
                             // Display leaderboard
                             byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
                             if (ReadBuffer(scores))
@@ -205,7 +211,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                         }
 
                     // Game end
-                    case 213: {
+                    case 219: {
                             // Display leaderboard
                             byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
                             if (ReadBuffer(scores))
