@@ -342,7 +342,10 @@ namespace Blue_Lagoon___Chaos_Edition {
 
             // Go back to main menu
             try { this.Close(); }
-            catch { Invoke(this.Close); }
+            catch {
+                try { Invoke(this.Close); }
+                catch { }
+            }
         }
         #endregion
     }
