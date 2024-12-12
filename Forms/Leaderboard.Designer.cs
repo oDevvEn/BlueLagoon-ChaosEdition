@@ -131,6 +131,7 @@
             Name = "Leaderboard";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Blue Lagoon - Chaos Edition";
+            Load += Leaderboard_Load;
             BackgroundPanel.ResumeLayout(false);
             BackgroundPanel.PerformLayout();
             LeaderboardPanel.ResumeLayout(false);

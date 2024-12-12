@@ -13,11 +13,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             Program.ScaleUI(PlayerColumn);
             Program.ScaleUI(ScoreColumn);
 
-            // Timer for progress bar (leaderboard only shown for 5 seconds)
-            Timer timer = new Timer();
-            timer.Interval = 50;
-            timer.Tick += ProgressBarUpdate;
-            timer.Start();
+            
 
             // Loop through every score and display every player with their score on leaderboard
             for (int i = 0; i < scores.Length; i += 2) {
@@ -41,6 +37,15 @@ namespace Blue_Lagoon___Chaos_Edition {
                 LeaderboardPanel.Controls.Add(username);
                 LeaderboardPanel.Controls.Add(score, 1, i / 2 + 1);
             }
+        }
+        private void Leaderboard_Load(object sender, EventArgs e) {
+            this.TopMost = true;
+
+            // Timer for progress bar (leaderboard only shown for 5 seconds)
+            Timer timer = new Timer();
+            timer.Interval = 50;
+            timer.Tick += ProgressBarUpdate;
+            timer.Start();
         }
 
         private void ProgressBarUpdate(object? sender, EventArgs e) {

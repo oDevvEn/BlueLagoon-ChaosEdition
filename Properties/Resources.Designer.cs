@@ -63,9 +63,9 @@ namespace Blue_Lagoon___Chaos_Edition.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hexDesert {
+        internal static System.Drawing.Bitmap hexDesert1 {
             get {
-                object obj = ResourceManager.GetObject("hexDesert", resourceCulture);
+                object obj = ResourceManager.GetObject("hexDesert1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Blue_Lagoon___Chaos_Edition.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hexLand {
+        internal static System.Drawing.Bitmap hexDesert2 {
             get {
-                object obj = ResourceManager.GetObject("hexLand", resourceCulture);
+                object obj = ResourceManager.GetObject("hexDesert2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Blue_Lagoon___Chaos_Edition.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hexSnow {
+        internal static System.Drawing.Bitmap hexLand1 {
             get {
-                object obj = ResourceManager.GetObject("hexSnow", resourceCulture);
+                object obj = ResourceManager.GetObject("hexLand1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,49 @@ namespace Blue_Lagoon___Chaos_Edition.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hexWater {
+        internal static System.Drawing.Bitmap hexLand2 {
             get {
-                object obj = ResourceManager.GetObject("hexWater", resourceCulture);
+                object obj = ResourceManager.GetObject("hexLand2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hexLand3 {
+            get {
+                object obj = ResourceManager.GetObject("hexLand3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hexLand4 {
+            get {
+                object obj = ResourceManager.GetObject("hexLand4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hexSnow1 {
+            get {
+                object obj = ResourceManager.GetObject("hexSnow1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hexWater1 {
+            get {
+                object obj = ResourceManager.GetObject("hexWater1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

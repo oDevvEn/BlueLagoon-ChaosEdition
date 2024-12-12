@@ -10,7 +10,6 @@ namespace Blue_Lagoon___Chaos_Edition {
         // Const references
         public static int displaySize;
         public readonly static Random random = new Random();
-        public readonly static Bitmap[] hexImages = [Resources.hexWater, Resources.hexLand, Resources.hexSnow, Resources.hexDesert];
 
         // Networking variables
         byte[] username;
@@ -21,7 +20,7 @@ namespace Blue_Lagoon___Chaos_Edition {
         Hexagon[,] map;
         int mapSize;
         int displayY;
-
+        
         // Hex configuration variables
         public Size hexSize;
         public Point GetHexPosition(int y, int x) => new Point(x // no complex mathematics done here
@@ -378,7 +377,12 @@ namespace Blue_Lagoon___Chaos_Edition {
     public class Hexagon : PictureBox {
         #region Variables
         // Const refernece variables
+        static readonly Random random = new Random();
         static readonly Bitmap[] ResourceTypes = [Resources.resStatulette, Resources.resWood, Resources.resStone, Resources.resFish, Resources.resMeat, Resources.resWheat];
+        static readonly Bitmap[][] MapImages = [[Resources.hexWater1],
+                                                [Resources.hexLand1, Resources.hexLand2, Resources.hexLand3, Resources.hexLand4],
+                                                [Resources.hexSnow1],
+                                                [Resources.hexDesert1, Resources.hexDesert2]];
         public static Game game;
         public static Region region;
         
@@ -392,7 +396,8 @@ namespace Blue_Lagoon___Chaos_Edition {
             // Hex data variable
             this.y = y;
             this.x = x;
-            baseImage = Game.hexImages[hexType];
+            Bitmap[] images = MapImages[hexType]; // temp
+            baseImage = images[random.Next(images.Length)];
             Clear();
 
             // Hex configuration
