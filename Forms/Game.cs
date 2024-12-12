@@ -1,5 +1,5 @@
 ﻿using Blue_Lagoon___Chaos_Edition.Properties;
-using System.Diagnostics.Eventing.Reader;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Net.Sockets;
 using System.Text;
@@ -8,8 +8,8 @@ namespace Blue_Lagoon___Chaos_Edition {
     public partial class Game : Form {
         #region Variables
         // Const references
-        public static Form mainMenu;
         public static int displaySize;
+        public readonly static Random random = new Random();
         public readonly static Bitmap[] hexImages = [Resources.hexWater, Resources.hexLand, Resources.hexSnow, Resources.hexDesert];
 
         // Networking variables
@@ -46,7 +46,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             InitializeComponent(); // wat dis
 
             // Setup const references
-            displaySize = mainMenu.Size.Height * 17 / 13;
+            displaySize = Program.mainMenu.Size.Height * 17 / 13;
             Hexagon.game = this;
 
             // Networking Setup
@@ -73,6 +73,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             Label lbl = new Label();
             Program.ScaleUI(lbl, 12f);
             lbl.Text = name;
+            lbl.Dock = DockStyle.Fill;
             tableLayoutPanel3.Controls.Add(lbl);
         }
 
@@ -136,7 +137,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     case 210: {
                             // Setup constants
                             mapSize = ReadByte();
-                            displayY = (mainMenu.Size.Height - displaySize * (mapSize - 1) * 13 / (mapSize * 18) - displaySize / mapSize) / 2;
+                            displayY = (Program.mainMenu.Size.Height - displaySize * (mapSize - 1) * 13 / (mapSize * 18) - displaySize / mapSize) / 2;
                             hexSize = new Size(displaySize / mapSize, displaySize / mapSize);
 
                             byte[] mapData = new byte[mapSize * mapSize];
@@ -192,11 +193,24 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
-                    // Natural disaster
+                    // Hexagon cleared
                     case 212: {
+                            byte[] data = new byte[2]; // y x
+                            if (ReadBuffer(data))
+                                Invoke(map[data[0], data[1]].Clear);
+                            break;
+                        }
+
+                    // Natural disaster
+                    case 213: {
+                            int disaster = ReadByte();
+
+                            if (0 <= disaster && disaster <= 3)
+                                Invoke(new NaturalDisaster(disaster).Show);
 
                             break;
                         }
+
 
                     // Clear map -- Settlement Phase time
                     case 218: {
@@ -230,7 +244,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     case 220: {
                             byte[] buffer = new byte[128];
                             if (ReadBuffer(buffer))
-                                Invoke(AddPlayerName, Encoding.Unicode.GetString(buffer));
+                                Invoke(AddPlayerName, Encoding.UTF32.GetString(buffer).TrimEnd());
 
                             break;
                         }
@@ -239,7 +253,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     case 221: {
                             int index = ReadByte();
                             if (index != -1)
-                                Invoke(tableLayoutPanel3.GetControlFromPosition(0, index).Dispose);
+                                Invoke(() => tableLayoutPanel3.GetControlFromPosition(0, index)?.Dispose());
 
                             break;
                         }
@@ -288,14 +302,19 @@ namespace Blue_Lagoon___Chaos_Edition {
                             break;
                         }
 
+                    /* this code has been removed for somehow breaking my switch statement
                     // bad buffer -- clear it
                     default: {
-                            while (ReadByte() != -1)
-                                continue;
+                            Debug.WriteLine("lmao" + dataType);
+                            int a = 0;
+                            while (a != -1) {
+                                a = ReadByte();
+                                Debug.WriteLine("baddddddddddddddd " + a);
+                            }
 
                             break;
-                        }
-                        #endregion
+                        }*/
+                    #endregion
                 }
             }
 

@@ -18,7 +18,7 @@
                 // Put data in textboxes
                 if (text.Length == 3) {
                     if (!string.IsNullOrWhiteSpace(text[0]))
-                        username.Text = text[0].Length > 32 ? text[0][..32] : text[0];
+                        username.Text = text[0].Length > 32 ? text[0][..32].Trim() : text[0].Trim();
                     if (!string.IsNullOrWhiteSpace(text[1]))
                         ipAddress.Text = text[1].Length > 32767 ? text[1][..32767] : text[1];
                     if (!string.IsNullOrWhiteSpace(text[2]) && int.TryParse(text[2], out _)) {
@@ -47,6 +47,11 @@
 
         #region Confirm Button
         private void ConfirmButton_Click(object sender, EventArgs e) {
+            // Clean up inputs (remove trailing whitespace)
+            username.Text = username.Text.Trim();
+            ipAddress.Text = ipAddress.Text.Trim();
+
+            // Check if valid enough inputs
             if (!string.IsNullOrWhiteSpace(username.Text) && !string.IsNullOrWhiteSpace(ipAddress.Text) && int.TryParse(port.Text, out _)) {
                 // Store connection in file for next time
                 using (StreamWriter file = new StreamWriter("server.txt", false)) {

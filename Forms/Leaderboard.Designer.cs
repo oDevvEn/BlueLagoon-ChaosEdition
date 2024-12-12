@@ -128,9 +128,8 @@
             ClientSize = new Size(400, 250);
             Controls.Add(BackgroundPanel);
             FormBorderStyle = FormBorderStyle.None;
-            MaximumSize = new Size(400, 250);
-            MinimumSize = new Size(400, 250);
             Name = "Leaderboard";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Blue Lagoon - Chaos Edition";
             BackgroundPanel.ResumeLayout(false);
             BackgroundPanel.PerformLayout();

@@ -15,6 +15,8 @@ namespace Blue_Lagoon___Chaos_Edition {
         }
         #endregion
 
+        public static readonly MainMenu mainMenu = new MainMenu();
+
         [STAThread]
         static void Main() {
             // no idea what you are
@@ -40,7 +42,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     Statistics.pointers = [p0, p1, p2, p3, p4, p5, p6, p7, p8];
 
                     // Main Menu, I choose you!
-                    Application.Run(new MainMenu());
+                    Application.Run(mainMenu);
                 }
             }
         }

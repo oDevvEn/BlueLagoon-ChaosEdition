@@ -25,7 +25,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                 Label username = new Label() {
                     Text = game.tableLayoutPanel3.GetControlFromPosition(0, i / 2)?.Text,
                     Font = new Font("Segoe UI", 12F * Program.scale),
-                    TextAlign = ContentAlignment.MiddleCenter,
+                    TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
                 };
 
@@ -33,7 +33,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                 Label score = new Label() {
                     Text = ((scores[i] * 256) + scores[i + 1]).ToString(),
                     Font = new Font("Segoe UI", 12F * Program.scale),
-                    TextAlign = ContentAlignment.MiddleCenter,
+                    TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
                 };
 
