@@ -27,7 +27,7 @@
             ControlPanel = new TableLayoutPanel();
             SettlerCountText = new Label();
             VillageCountText = new Label();
-            tableLayoutPanel3 = new TableLayoutPanel();
+            PlayerListTable = new TableLayoutPanel();
             LeaveButton = new Button();
             MapPanel = new Panel();
             BackgroundPanel.SuspendLayout();
@@ -52,15 +52,17 @@
             // 
             // ControlPanel
             // 
+            ControlPanel.BackColor = Color.FromArgb(40, 40, 40);
             ControlPanel.ColumnCount = 1;
             ControlPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             ControlPanel.Controls.Add(SettlerCountText, 0, 1);
             ControlPanel.Controls.Add(VillageCountText, 0, 2);
-            ControlPanel.Controls.Add(tableLayoutPanel3, 0, 0);
+            ControlPanel.Controls.Add(PlayerListTable, 0, 0);
             ControlPanel.Controls.Add(LeaveButton, 0, 4);
             ControlPanel.Dock = DockStyle.Fill;
             ControlPanel.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            ControlPanel.Location = new Point(1017, 3);
+            ControlPanel.Location = new Point(1014, 0);
+            ControlPanel.Margin = new Padding(0);
             ControlPanel.Name = "ControlPanel";
             ControlPanel.RowCount = 5;
             ControlPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
@@ -68,7 +70,7 @@
             ControlPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 7.5F));
             ControlPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             ControlPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
-            ControlPanel.Size = new Size(260, 714);
+            ControlPanel.Size = new Size(266, 720);
             ControlPanel.TabIndex = 0;
             // 
             // SettlerCountText
@@ -76,10 +78,11 @@
             SettlerCountText.AutoSize = true;
             SettlerCountText.Dock = DockStyle.Fill;
             SettlerCountText.Font = new Font("Consolas", 12F);
-            SettlerCountText.Location = new Point(2, 287);
+            SettlerCountText.ForeColor = Color.White;
+            SettlerCountText.Location = new Point(2, 290);
             SettlerCountText.Margin = new Padding(2);
             SettlerCountText.Name = "SettlerCountText";
-            SettlerCountText.Size = new Size(256, 49);
+            SettlerCountText.Size = new Size(262, 50);
             SettlerCountText.TabIndex = 10;
             SettlerCountText.Text = "Settler Count: 12345";
             SettlerCountText.TextAlign = ContentAlignment.BottomCenter;
@@ -89,48 +92,56 @@
             VillageCountText.AutoSize = true;
             VillageCountText.Dock = DockStyle.Fill;
             VillageCountText.Font = new Font("Consolas", 12F);
-            VillageCountText.Location = new Point(2, 340);
+            VillageCountText.ForeColor = Color.White;
+            VillageCountText.Location = new Point(2, 344);
             VillageCountText.Margin = new Padding(2);
             VillageCountText.Name = "VillageCountText";
-            VillageCountText.Size = new Size(256, 49);
+            VillageCountText.Size = new Size(262, 50);
             VillageCountText.TabIndex = 11;
             VillageCountText.Text = "Village Count: 12345";
             VillageCountText.TextAlign = ContentAlignment.TopCenter;
             // 
-            // tableLayoutPanel3
+            // PlayerListTable
             // 
-            tableLayoutPanel3.AutoScroll = true;
-            tableLayoutPanel3.ColumnCount = 1;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(6, 4);
-            tableLayoutPanel3.Margin = new Padding(6, 4, 6, 4);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(248, 277);
-            tableLayoutPanel3.TabIndex = 3;
+            PlayerListTable.AutoScroll = true;
+            PlayerListTable.ColumnCount = 1;
+            PlayerListTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            PlayerListTable.Dock = DockStyle.Fill;
+            PlayerListTable.Location = new Point(6, 4);
+            PlayerListTable.Margin = new Padding(6, 4, 6, 4);
+            PlayerListTable.Name = "PlayerListTable";
+            PlayerListTable.RowCount = 1;
+            PlayerListTable.RowStyles.Add(new RowStyle());
+            PlayerListTable.Size = new Size(254, 280);
+            PlayerListTable.TabIndex = 3;
             // 
             // LeaveButton
             // 
             LeaveButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            LeaveButton.BackColor = Color.FromArgb(30, 30, 30);
+            LeaveButton.FlatAppearance.BorderColor = Color.FromArgb(34, 34, 34);
+            LeaveButton.FlatAppearance.BorderSize = 2;
+            LeaveButton.FlatStyle = FlatStyle.Flat;
             LeaveButton.Font = new Font("Segoe UI", 26F);
+            LeaveButton.ForeColor = Color.White;
             LeaveButton.ImeMode = ImeMode.NoControl;
-            LeaveButton.Location = new Point(20, 625);
+            LeaveButton.Location = new Point(20, 632);
             LeaveButton.Margin = new Padding(20);
             LeaveButton.Name = "LeaveButton";
-            LeaveButton.Size = new Size(220, 69);
+            LeaveButton.Size = new Size(226, 68);
             LeaveButton.TabIndex = 4;
             LeaveButton.Text = "Leave";
-            LeaveButton.UseVisualStyleBackColor = true;
+            LeaveButton.UseVisualStyleBackColor = false;
             LeaveButton.Click += LeaveButton_Click;
             // 
             // MapPanel
             // 
+            MapPanel.BackColor = Color.FromArgb(0, 114, 255);
             MapPanel.Dock = DockStyle.Fill;
-            MapPanel.Location = new Point(3, 3);
+            MapPanel.Location = new Point(0, 0);
+            MapPanel.Margin = new Padding(0);
             MapPanel.Name = "MapPanel";
-            MapPanel.Size = new Size(1008, 714);
+            MapPanel.Size = new Size(1014, 720);
             MapPanel.TabIndex = 3;
             // 
             // Game
@@ -157,7 +168,7 @@
         internal TableLayoutPanel BackgroundPanel;
         public Panel MapPanel;
         private TableLayoutPanel ControlPanel;
-        internal TableLayoutPanel tableLayoutPanel3;
+        internal TableLayoutPanel PlayerListTable;
         private Button LeaveButton;
         private Label SettlerCountText;
         private Label VillageCountText;

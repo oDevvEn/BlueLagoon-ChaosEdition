@@ -19,10 +19,11 @@ namespace Blue_Lagoon___Chaos_Edition {
             for (int i = 0; i < scores.Length; i += 2) {
                 // Setup username variable
                 Label username = new Label() {
-                    Text = game.tableLayoutPanel3.GetControlFromPosition(0, i / 2)?.Text,
+                    Text = game.PlayerListTable.GetControlFromPosition(0, i / 2)?.Text,
                     Font = new Font("Segoe UI", 12F * Program.scale),
                     TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
+                    ForeColor = Color.White,
                 };
 
                 // Setup score label
@@ -31,6 +32,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     Font = new Font("Segoe UI", 12F * Program.scale),
                     TextAlign = ContentAlignment.TopCenter,
                     Dock = DockStyle.Fill,
+                    ForeColor = Color.White,
                 };
 
                 // Display player and score
@@ -39,7 +41,8 @@ namespace Blue_Lagoon___Chaos_Edition {
             }
         }
         private void Leaderboard_Load(object sender, EventArgs e) {
-            this.TopMost = true;
+            this.Activate();
+            //this.TopMost = true;
 
             // Timer for progress bar (leaderboard only shown for 5 seconds)
             Timer timer = new Timer();

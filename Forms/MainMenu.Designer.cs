@@ -41,7 +41,7 @@
             ExplorationPhasesLostText = new Label();
             ExplorationPhasesWonText = new Label();
             GamesPlayedText = new Label();
-            label1 = new Label();
+            pleasetext = new Label();
             MainMenuPanel.SuspendLayout();
             BackgroundPanel.SuspendLayout();
             StatisticsPanel.SuspendLayout();
@@ -50,48 +50,64 @@
             // PlayButton
             // 
             PlayButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PlayButton.BackColor = Color.FromArgb(30, 30, 30);
+            PlayButton.FlatAppearance.BorderColor = Color.FromArgb(34, 34, 34);
+            PlayButton.FlatAppearance.BorderSize = 2;
+            PlayButton.FlatStyle = FlatStyle.Flat;
             PlayButton.Font = new Font("Segoe UI", 29F);
+            PlayButton.ForeColor = Color.White;
             PlayButton.ImeMode = ImeMode.NoControl;
-            PlayButton.Location = new Point(20, 286);
+            PlayButton.Location = new Point(20, 287);
             PlayButton.Margin = new Padding(20);
             PlayButton.Name = "PlayButton";
-            PlayButton.Size = new Size(338, 83);
+            PlayButton.Size = new Size(344, 84);
             PlayButton.TabIndex = 0;
             PlayButton.Text = "Play";
-            PlayButton.UseVisualStyleBackColor = true;
+            PlayButton.UseVisualStyleBackColor = false;
             PlayButton.Click += PlayButton_Click;
             // 
             // StatisticsButton
             // 
             StatisticsButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            StatisticsButton.BackColor = Color.FromArgb(30, 30, 30);
+            StatisticsButton.FlatAppearance.BorderColor = Color.FromArgb(34, 34, 34);
+            StatisticsButton.FlatAppearance.BorderSize = 2;
+            StatisticsButton.FlatStyle = FlatStyle.Flat;
             StatisticsButton.Font = new Font("Segoe UI", 29F);
+            StatisticsButton.ForeColor = Color.White;
             StatisticsButton.ImeMode = ImeMode.NoControl;
-            StatisticsButton.Location = new Point(20, 409);
+            StatisticsButton.Location = new Point(20, 411);
             StatisticsButton.Margin = new Padding(20);
             StatisticsButton.Name = "StatisticsButton";
-            StatisticsButton.Size = new Size(338, 83);
+            StatisticsButton.Size = new Size(344, 84);
             StatisticsButton.TabIndex = 2;
             StatisticsButton.Text = "Statistics";
-            StatisticsButton.UseVisualStyleBackColor = true;
+            StatisticsButton.UseVisualStyleBackColor = false;
             StatisticsButton.Click += StatisticsButton_Click;
             // 
             // QuitButton
             // 
             QuitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            QuitButton.BackColor = Color.FromArgb(30, 30, 30);
+            QuitButton.FlatAppearance.BorderColor = Color.FromArgb(34, 34, 34);
+            QuitButton.FlatAppearance.BorderSize = 2;
+            QuitButton.FlatStyle = FlatStyle.Flat;
             QuitButton.Font = new Font("Segoe UI", 29F);
+            QuitButton.ForeColor = Color.White;
             QuitButton.ImeMode = ImeMode.NoControl;
-            QuitButton.Location = new Point(20, 532);
+            QuitButton.Location = new Point(20, 535);
             QuitButton.Margin = new Padding(20);
             QuitButton.Name = "QuitButton";
-            QuitButton.Size = new Size(338, 83);
+            QuitButton.Size = new Size(344, 84);
             QuitButton.TabIndex = 3;
             QuitButton.Text = "Rage Quit";
-            QuitButton.UseVisualStyleBackColor = true;
+            QuitButton.UseVisualStyleBackColor = false;
             QuitButton.Click += QuitButton_Click;
             // 
             // MainMenuPanel
             // 
             MainMenuPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            MainMenuPanel.BackColor = Color.FromArgb(230, 40, 40, 40);
             MainMenuPanel.ColumnCount = 1;
             MainMenuPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             MainMenuPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
@@ -102,7 +118,8 @@
             MainMenuPanel.Controls.Add(GameTitle, 0, 1);
             MainMenuPanel.Dock = DockStyle.Fill;
             MainMenuPanel.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            MainMenuPanel.Location = new Point(131, 3);
+            MainMenuPanel.Location = new Point(128, 0);
+            MainMenuPanel.Margin = new Padding(0);
             MainMenuPanel.Name = "MainMenuPanel";
             MainMenuPanel.RightToLeft = RightToLeft.No;
             MainMenuPanel.RowCount = 7;
@@ -113,7 +130,7 @@
             MainMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 17.333334F));
             MainMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 17.333334F));
             MainMenuPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10.666666F));
-            MainMenuPanel.Size = new Size(378, 714);
+            MainMenuPanel.Size = new Size(384, 720);
             MainMenuPanel.TabIndex = 4;
             // 
             // GameTitle
@@ -122,16 +139,19 @@
             GameTitle.BackColor = Color.Transparent;
             GameTitle.Dock = DockStyle.Fill;
             GameTitle.Font = new Font("Segoe UI Semibold", 34F, FontStyle.Bold);
+            GameTitle.ForeColor = Color.White;
             GameTitle.Location = new Point(5, 81);
             GameTitle.Margin = new Padding(5);
             GameTitle.Name = "GameTitle";
-            GameTitle.Size = new Size(368, 142);
+            GameTitle.Size = new Size(374, 143);
             GameTitle.TabIndex = 5;
             GameTitle.Text = "Blue Lagoon (Chaos Edition)";
             GameTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // BackgroundPanel
             // 
+            BackgroundPanel.BackgroundImage = Properties.Resources.background;
+            BackgroundPanel.BackgroundImageLayout = ImageLayout.Zoom;
             BackgroundPanel.ColumnCount = 5;
             BackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             BackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
@@ -140,7 +160,7 @@
             BackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             BackgroundPanel.Controls.Add(MainMenuPanel, 1, 0);
             BackgroundPanel.Controls.Add(StatisticsPanel, 3, 0);
-            BackgroundPanel.Controls.Add(label1, 2, 0);
+            BackgroundPanel.Controls.Add(pleasetext, 2, 0);
             BackgroundPanel.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
             BackgroundPanel.Location = new Point(0, 0);
             BackgroundPanel.Name = "BackgroundPanel";
@@ -151,6 +171,7 @@
             // 
             // StatisticsPanel
             // 
+            StatisticsPanel.BackColor = Color.FromArgb(230, 40, 40, 40);
             StatisticsPanel.ColumnCount = 1;
             StatisticsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             StatisticsPanel.Controls.Add(GoBackButton, 0, 11);
@@ -166,7 +187,8 @@
             StatisticsPanel.Controls.Add(GamesPlayedText, 0, 5);
             StatisticsPanel.Dock = DockStyle.Fill;
             StatisticsPanel.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            StatisticsPanel.Location = new Point(2051, 3);
+            StatisticsPanel.Location = new Point(2048, 0);
+            StatisticsPanel.Margin = new Padding(0);
             StatisticsPanel.Name = "StatisticsPanel";
             StatisticsPanel.RowCount = 13;
             StatisticsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
@@ -182,21 +204,26 @@
             StatisticsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             StatisticsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             StatisticsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            StatisticsPanel.Size = new Size(378, 714);
+            StatisticsPanel.Size = new Size(384, 720);
             StatisticsPanel.TabIndex = 5;
             // 
             // GoBackButton
             // 
             GoBackButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            GoBackButton.BackColor = Color.FromArgb(30, 30, 30);
+            GoBackButton.FlatAppearance.BorderColor = Color.FromArgb(34, 34, 34);
+            GoBackButton.FlatAppearance.BorderSize = 2;
+            GoBackButton.FlatStyle = FlatStyle.Flat;
             GoBackButton.Font = new Font("Segoe UI", 29F);
+            GoBackButton.ForeColor = Color.White;
             GoBackButton.ImeMode = ImeMode.NoControl;
-            GoBackButton.Location = new Point(20, 548);
+            GoBackButton.Location = new Point(20, 560);
             GoBackButton.Margin = new Padding(20);
             GoBackButton.Name = "GoBackButton";
-            GoBackButton.Size = new Size(338, 67);
+            GoBackButton.Size = new Size(344, 68);
             GoBackButton.TabIndex = 7;
             GoBackButton.Text = "Go Back";
-            GoBackButton.UseVisualStyleBackColor = true;
+            GoBackButton.UseVisualStyleBackColor = false;
             GoBackButton.Click += StatisticsButton_Click;
             // 
             // StatisticsLabel
@@ -205,10 +232,11 @@
             StatisticsLabel.BackColor = Color.Transparent;
             StatisticsLabel.Dock = DockStyle.Fill;
             StatisticsLabel.Font = new Font("Segoe UI Semibold", 40F, FontStyle.Bold);
-            StatisticsLabel.Location = new Point(5, 76);
+            StatisticsLabel.ForeColor = Color.White;
+            StatisticsLabel.Location = new Point(5, 77);
             StatisticsLabel.Margin = new Padding(5);
             StatisticsLabel.Name = "StatisticsLabel";
-            StatisticsLabel.Size = new Size(368, 132);
+            StatisticsLabel.Size = new Size(374, 134);
             StatisticsLabel.TabIndex = 6;
             StatisticsLabel.Text = "Statistics";
             StatisticsLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -216,12 +244,14 @@
             // SettlersPlacedText
             // 
             SettlersPlacedText.AutoSize = true;
+            SettlersPlacedText.BackColor = Color.Transparent;
             SettlersPlacedText.Dock = DockStyle.Fill;
             SettlersPlacedText.Font = new Font("Consolas", 12F);
-            SettlersPlacedText.Location = new Point(0, 213);
+            SettlersPlacedText.ForeColor = Color.White;
+            SettlersPlacedText.Location = new Point(0, 216);
             SettlersPlacedText.Margin = new Padding(0);
             SettlersPlacedText.Name = "SettlersPlacedText";
-            SettlersPlacedText.Size = new Size(378, 35);
+            SettlersPlacedText.Size = new Size(384, 36);
             SettlersPlacedText.TabIndex = 8;
             SettlersPlacedText.Text = "label1";
             SettlersPlacedText.TextAlign = ContentAlignment.MiddleCenter;
@@ -229,12 +259,14 @@
             // VillagesPlacedText
             // 
             VillagesPlacedText.AutoSize = true;
+            VillagesPlacedText.BackColor = Color.Transparent;
             VillagesPlacedText.Dock = DockStyle.Fill;
             VillagesPlacedText.Font = new Font("Consolas", 12F);
-            VillagesPlacedText.Location = new Point(0, 248);
+            VillagesPlacedText.ForeColor = Color.White;
+            VillagesPlacedText.Location = new Point(0, 252);
             VillagesPlacedText.Margin = new Padding(0);
             VillagesPlacedText.Name = "VillagesPlacedText";
-            VillagesPlacedText.Size = new Size(378, 35);
+            VillagesPlacedText.Size = new Size(384, 36);
             VillagesPlacedText.TabIndex = 9;
             VillagesPlacedText.Text = "label2";
             VillagesPlacedText.TextAlign = ContentAlignment.MiddleCenter;
@@ -242,12 +274,14 @@
             // ServersJoinedText
             // 
             ServersJoinedText.AutoSize = true;
+            ServersJoinedText.BackColor = Color.Transparent;
             ServersJoinedText.Dock = DockStyle.Fill;
             ServersJoinedText.Font = new Font("Consolas", 12F);
-            ServersJoinedText.Location = new Point(0, 283);
+            ServersJoinedText.ForeColor = Color.White;
+            ServersJoinedText.Location = new Point(0, 288);
             ServersJoinedText.Margin = new Padding(0);
             ServersJoinedText.Name = "ServersJoinedText";
-            ServersJoinedText.Size = new Size(378, 35);
+            ServersJoinedText.Size = new Size(384, 36);
             ServersJoinedText.TabIndex = 10;
             ServersJoinedText.Text = "label3";
             ServersJoinedText.TextAlign = ContentAlignment.MiddleCenter;
@@ -255,12 +289,14 @@
             // SettlementPhasesUnplayableText
             // 
             SettlementPhasesUnplayableText.AutoSize = true;
+            SettlementPhasesUnplayableText.BackColor = Color.Transparent;
             SettlementPhasesUnplayableText.Dock = DockStyle.Fill;
             SettlementPhasesUnplayableText.Font = new Font("Consolas", 12F);
-            SettlementPhasesUnplayableText.Location = new Point(0, 493);
+            SettlementPhasesUnplayableText.ForeColor = Color.White;
+            SettlementPhasesUnplayableText.Location = new Point(0, 504);
             SettlementPhasesUnplayableText.Margin = new Padding(0);
             SettlementPhasesUnplayableText.Name = "SettlementPhasesUnplayableText";
-            SettlementPhasesUnplayableText.Size = new Size(378, 35);
+            SettlementPhasesUnplayableText.Size = new Size(384, 36);
             SettlementPhasesUnplayableText.TabIndex = 16;
             SettlementPhasesUnplayableText.Text = "Settlement Phases Unplayable: 12345";
             SettlementPhasesUnplayableText.TextAlign = ContentAlignment.MiddleCenter;
@@ -268,12 +304,14 @@
             // SettlementPhasesLostText
             // 
             SettlementPhasesLostText.AutoSize = true;
+            SettlementPhasesLostText.BackColor = Color.Transparent;
             SettlementPhasesLostText.Dock = DockStyle.Fill;
             SettlementPhasesLostText.Font = new Font("Consolas", 12F);
-            SettlementPhasesLostText.Location = new Point(0, 458);
+            SettlementPhasesLostText.ForeColor = Color.White;
+            SettlementPhasesLostText.Location = new Point(0, 468);
             SettlementPhasesLostText.Margin = new Padding(0);
             SettlementPhasesLostText.Name = "SettlementPhasesLostText";
-            SettlementPhasesLostText.Size = new Size(378, 35);
+            SettlementPhasesLostText.Size = new Size(384, 36);
             SettlementPhasesLostText.TabIndex = 15;
             SettlementPhasesLostText.Text = "label8";
             SettlementPhasesLostText.TextAlign = ContentAlignment.MiddleCenter;
@@ -281,12 +319,14 @@
             // SettlementPhasesWonText
             // 
             SettlementPhasesWonText.AutoSize = true;
+            SettlementPhasesWonText.BackColor = Color.Transparent;
             SettlementPhasesWonText.Dock = DockStyle.Fill;
             SettlementPhasesWonText.Font = new Font("Consolas", 12F);
-            SettlementPhasesWonText.Location = new Point(0, 423);
+            SettlementPhasesWonText.ForeColor = Color.White;
+            SettlementPhasesWonText.Location = new Point(0, 432);
             SettlementPhasesWonText.Margin = new Padding(0);
             SettlementPhasesWonText.Name = "SettlementPhasesWonText";
-            SettlementPhasesWonText.Size = new Size(378, 35);
+            SettlementPhasesWonText.Size = new Size(384, 36);
             SettlementPhasesWonText.TabIndex = 14;
             SettlementPhasesWonText.Text = "label7";
             SettlementPhasesWonText.TextAlign = ContentAlignment.MiddleCenter;
@@ -294,12 +334,14 @@
             // ExplorationPhasesLostText
             // 
             ExplorationPhasesLostText.AutoSize = true;
+            ExplorationPhasesLostText.BackColor = Color.Transparent;
             ExplorationPhasesLostText.Dock = DockStyle.Fill;
             ExplorationPhasesLostText.Font = new Font("Consolas", 12F);
-            ExplorationPhasesLostText.Location = new Point(0, 388);
+            ExplorationPhasesLostText.ForeColor = Color.White;
+            ExplorationPhasesLostText.Location = new Point(0, 396);
             ExplorationPhasesLostText.Margin = new Padding(0);
             ExplorationPhasesLostText.Name = "ExplorationPhasesLostText";
-            ExplorationPhasesLostText.Size = new Size(378, 35);
+            ExplorationPhasesLostText.Size = new Size(384, 36);
             ExplorationPhasesLostText.TabIndex = 13;
             ExplorationPhasesLostText.Text = "label6";
             ExplorationPhasesLostText.TextAlign = ContentAlignment.MiddleCenter;
@@ -307,12 +349,14 @@
             // ExplorationPhasesWonText
             // 
             ExplorationPhasesWonText.AutoSize = true;
+            ExplorationPhasesWonText.BackColor = Color.Transparent;
             ExplorationPhasesWonText.Dock = DockStyle.Fill;
             ExplorationPhasesWonText.Font = new Font("Consolas", 12F);
-            ExplorationPhasesWonText.Location = new Point(0, 353);
+            ExplorationPhasesWonText.ForeColor = Color.White;
+            ExplorationPhasesWonText.Location = new Point(0, 360);
             ExplorationPhasesWonText.Margin = new Padding(0);
             ExplorationPhasesWonText.Name = "ExplorationPhasesWonText";
-            ExplorationPhasesWonText.Size = new Size(378, 35);
+            ExplorationPhasesWonText.Size = new Size(384, 36);
             ExplorationPhasesWonText.TabIndex = 12;
             ExplorationPhasesWonText.Text = "label5";
             ExplorationPhasesWonText.TextAlign = ContentAlignment.MiddleCenter;
@@ -320,27 +364,31 @@
             // GamesPlayedText
             // 
             GamesPlayedText.AutoSize = true;
+            GamesPlayedText.BackColor = Color.Transparent;
             GamesPlayedText.Dock = DockStyle.Fill;
             GamesPlayedText.Font = new Font("Consolas", 12F);
-            GamesPlayedText.Location = new Point(0, 318);
+            GamesPlayedText.ForeColor = Color.White;
+            GamesPlayedText.Location = new Point(0, 324);
             GamesPlayedText.Margin = new Padding(0);
             GamesPlayedText.Name = "GamesPlayedText";
-            GamesPlayedText.Size = new Size(378, 35);
+            GamesPlayedText.Size = new Size(384, 36);
             GamesPlayedText.TabIndex = 11;
             GamesPlayedText.Text = "label4";
             GamesPlayedText.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // pleasetext
             // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 7F);
-            label1.Location = new Point(515, 708);
-            label1.Name = "label1";
-            label1.Size = new Size(240, 12);
-            label1.TabIndex = 6;
-            label1.Text = "please make sure your display is 16:9 or close enough";
-            label1.TextAlign = ContentAlignment.BottomLeft;
+            pleasetext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            pleasetext.AutoSize = true;
+            pleasetext.BackColor = Color.Transparent;
+            pleasetext.Font = new Font("Segoe UI", 7F);
+            pleasetext.ForeColor = Color.DimGray;
+            pleasetext.Location = new Point(515, 708);
+            pleasetext.Name = "pleasetext";
+            pleasetext.Size = new Size(240, 12);
+            pleasetext.TabIndex = 6;
+            pleasetext.Text = "please make sure your display is 16:9 or close enough";
+            pleasetext.TextAlign = ContentAlignment.BottomLeft;
             // 
             // MainMenu
             // 
@@ -382,6 +430,6 @@
         private Label ExplorationPhasesLostText;
         private Label ExplorationPhasesWonText;
         private Label GamesPlayedText;
-        private Label label1;
+        private Label pleasetext;
     }
 }

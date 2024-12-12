@@ -35,6 +35,7 @@
             // 
             // BackgroundPanel
             // 
+            BackgroundPanel.BackColor = Color.FromArgb(40, 40, 40);
             BackgroundPanel.ColumnCount = 1;
             BackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             BackgroundPanel.Controls.Add(LeaderboardPanel, 0, 2);
@@ -73,6 +74,7 @@
             PlayerColumn.AutoSize = true;
             PlayerColumn.Dock = DockStyle.Fill;
             PlayerColumn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            PlayerColumn.ForeColor = Color.White;
             PlayerColumn.Location = new Point(3, 0);
             PlayerColumn.Name = "PlayerColumn";
             PlayerColumn.Size = new Size(269, 169);
@@ -85,6 +87,7 @@
             ScoreColumn.AutoSize = true;
             ScoreColumn.Dock = DockStyle.Fill;
             ScoreColumn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            ScoreColumn.ForeColor = Color.White;
             ScoreColumn.Location = new Point(278, 0);
             ScoreColumn.Name = "ScoreColumn";
             ScoreColumn.Size = new Size(113, 169);
@@ -94,7 +97,7 @@
             // 
             // WaitingBar
             // 
-            WaitingBar.BackColor = SystemColors.ControlDarkDark;
+            WaitingBar.BackColor = Color.FromArgb(30, 30, 30);
             WaitingBar.CustomText = "title bar";
             WaitingBar.Dock = DockStyle.Fill;
             WaitingBar.Location = new Point(0, 0);
@@ -105,7 +108,7 @@
             WaitingBar.Step = 1;
             WaitingBar.Style = ProgressBarStyle.Continuous;
             WaitingBar.TabIndex = 1;
-            WaitingBar.TextColor = Color.Black;
+            WaitingBar.TextColor = Color.White;
             WaitingBar.TextFont = new Font("Segoe UI", 11F, FontStyle.Bold);
             WaitingBar.VisualMode = ProgressBarSample.ProgressBarDisplayMode.CustomText;
             // 
@@ -114,6 +117,7 @@
             LeaderboardLabel.AutoSize = true;
             LeaderboardLabel.Dock = DockStyle.Fill;
             LeaderboardLabel.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
+            LeaderboardLabel.ForeColor = Color.White;
             LeaderboardLabel.Location = new Point(3, 25);
             LeaderboardLabel.Name = "LeaderboardLabel";
             LeaderboardLabel.Size = new Size(394, 50);

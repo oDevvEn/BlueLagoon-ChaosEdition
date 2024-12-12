@@ -73,7 +73,8 @@ namespace Blue_Lagoon___Chaos_Edition {
             Program.ScaleUI(lbl, 12f);
             lbl.Text = name;
             lbl.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Controls.Add(lbl);
+            lbl.ForeColor = Color.White;
+            PlayerListTable.Controls.Add(lbl);
         }
 
         // Update settler/village counters
@@ -214,7 +215,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     // Clear map -- Settlement Phase time
                     case 218: {
                             // Display leaderboard
-                            byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
+                            byte[] scores = new byte[2 * PlayerListTable.Controls.Count];
                             if (ReadBuffer(scores))
                                 new Leaderboard(this, scores).ShowDialog();
 
@@ -226,7 +227,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     // Game end
                     case 219: {
                             // Display leaderboard
-                            byte[] scores = new byte[2 * tableLayoutPanel3.Controls.Count];
+                            byte[] scores = new byte[2 * PlayerListTable.Controls.Count];
                             if (ReadBuffer(scores))
                                 new Leaderboard(this, scores).ShowDialog();
 
@@ -252,7 +253,7 @@ namespace Blue_Lagoon___Chaos_Edition {
                     case 221: {
                             int index = ReadByte();
                             if (index != -1)
-                                Invoke(() => tableLayoutPanel3.GetControlFromPosition(0, index)?.Dispose());
+                                Invoke(() => PlayerListTable.GetControlFromPosition(0, index)?.Dispose());
 
                             break;
                         }
@@ -262,9 +263,9 @@ namespace Blue_Lagoon___Chaos_Edition {
                             int index = ReadByte();
 
                             if (index != -1) {
-                                for (int i = 0; i < tableLayoutPanel3.Controls.Count; i++) {
-                                    Control label = tableLayoutPanel3.GetControlFromPosition(0, i);
-                                    label.ForeColor = index == i ? Color.Green : Color.Black;
+                                for (int i = 0; i < PlayerListTable.Controls.Count; i++) {
+                                    Control label = PlayerListTable.GetControlFromPosition(0, i);
+                                    label.ForeColor = index == i ? Color.Green : Color.White;
                                 }
                             }
 
@@ -368,7 +369,7 @@ namespace Blue_Lagoon___Chaos_Edition {
             try { this.Close(); }
             catch {
                 try { Invoke(this.Close); }
-                catch { }
+                catch { /* ??? */ }
             }
         }
         #endregion

@@ -13,6 +13,9 @@ namespace Blue_Lagoon___Chaos_Edition {
             control.Font = new Font(control.Font.FontFamily, fontSize * scale);
             control.Margin = new Padding((int)(control.Margin.All * scale));
         }
+        public static void ScaleButtonBorder(Button button) {
+            button.FlatAppearance.BorderSize *= (int)scale;
+        }
         #endregion
 
         public static readonly MainMenu mainMenu = new MainMenu();

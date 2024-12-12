@@ -117,14 +117,16 @@ namespace ProgressBarSample {
 
         private void DrawProgressBar(Graphics g) {
             Rectangle rect = ClientRectangle;
-
-            ProgressBarRenderer.DrawHorizontalBar(g, rect);
+           
+            // modified by devven
+            //ProgressBarRenderer.DrawHorizontalBar(g, rect);
+            g.DrawRectangle(new Pen(BackColor), rect);
 
             rect.Inflate(-3, -3);
 
             if (Value > 0) {
                 Rectangle clip = new Rectangle(0, 0, (int)Math.Round(((float)Value / Maximum) * rect.Width) + 6, rect.Height + 6); //modified by the devven
-
+                
                 g.FillRectangle(_progressColourBrush, clip);
             }
         }

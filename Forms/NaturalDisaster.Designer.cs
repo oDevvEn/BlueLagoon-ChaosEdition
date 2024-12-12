@@ -32,6 +32,7 @@
             // 
             // BackgroundPanel
             // 
+            BackgroundPanel.BackColor = Color.FromArgb(40, 40, 40);
             BackgroundPanel.ColumnCount = 1;
             BackgroundPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             BackgroundPanel.Controls.Add(NaturalDisasterText, 0, 2);
@@ -54,6 +55,7 @@
             NaturalDisasterText.AutoSize = true;
             NaturalDisasterText.Dock = DockStyle.Fill;
             NaturalDisasterText.Font = new Font("Segoe UI", 11F);
+            NaturalDisasterText.ForeColor = Color.White;
             NaturalDisasterText.Location = new Point(3, 55);
             NaturalDisasterText.Name = "NaturalDisasterText";
             NaturalDisasterText.Size = new Size(294, 45);
@@ -63,7 +65,7 @@
             // 
             // WaitingBar
             // 
-            WaitingBar.BackColor = SystemColors.ControlDarkDark;
+            WaitingBar.BackColor = Color.FromArgb(30, 30, 30);
             WaitingBar.CustomText = "title bar";
             WaitingBar.Dock = DockStyle.Fill;
             WaitingBar.Location = new Point(0, 0);
@@ -74,7 +76,7 @@
             WaitingBar.Step = 2;
             WaitingBar.Style = ProgressBarStyle.Continuous;
             WaitingBar.TabIndex = 1;
-            WaitingBar.TextColor = Color.Black;
+            WaitingBar.TextColor = Color.White;
             WaitingBar.TextFont = new Font("Segoe UI", 11F, FontStyle.Bold);
             WaitingBar.VisualMode = ProgressBarSample.ProgressBarDisplayMode.CustomText;
             // 
@@ -83,6 +85,7 @@
             NaturalDisasterLabel.AutoSize = true;
             NaturalDisasterLabel.Dock = DockStyle.Fill;
             NaturalDisasterLabel.Font = new Font("Segoe UI", 21F, FontStyle.Bold);
+            NaturalDisasterLabel.ForeColor = Color.White;
             NaturalDisasterLabel.Location = new Point(3, 20);
             NaturalDisasterLabel.Name = "NaturalDisasterLabel";
             NaturalDisasterLabel.Size = new Size(294, 35);

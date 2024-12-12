@@ -104,9 +104,13 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Scale UI
         void LoopScaleControlFonts(Control controls) {
-            foreach (Control control in controls.Controls)
+            foreach (Control control in controls.Controls) {
+                if (control is Button button)
+                    Program.ScaleButtonBorder(button);
+                
                 if (control is Button || control is Label)
                     Program.ScaleUI(control);
+            }
         }
         private void MainMenu_Load(object sender, EventArgs e) {
             // Calculate scale
