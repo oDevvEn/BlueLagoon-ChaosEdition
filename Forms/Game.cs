@@ -58,9 +58,14 @@ namespace Blue_Lagoon___Chaos_Edition {
             Task.Run(HandleData);
 
             // Scale UI
-            foreach (Control control in ControlPanel.Controls)
+            foreach (Control control in ControlPanel.Controls) {
                 if (control is Label || control is Button)
                     Program.ScaleUI(control);
+
+                if (control is Button button)
+                    Program.ScaleButtonBorder(button);
+                
+            }
         }
         #endregion
 

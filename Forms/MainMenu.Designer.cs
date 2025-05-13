@@ -150,6 +150,7 @@
             // 
             // BackgroundPanel
             // 
+            BackgroundPanel.BackColor = Color.FromArgb(40, 40, 40);
             BackgroundPanel.BackgroundImage = Properties.Resources.background;
             BackgroundPanel.BackgroundImageLayout = ImageLayout.Zoom;
             BackgroundPanel.ColumnCount = 5;
@@ -394,6 +395,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(40, 40, 40);
             ClientSize = new Size(1386, 720);
             Controls.Add(BackgroundPanel);
             FormBorderStyle = FormBorderStyle.None;

